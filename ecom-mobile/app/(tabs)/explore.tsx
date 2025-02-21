@@ -1,21 +1,57 @@
-import { StyleSheet } from "react-native";
 import React from "react";
-import { ThemedText, ThemedView } from "@/components/ui/atoms";
+import { ScrollView, StyleSheet, useColorScheme } from "react-native";
+import { ProductTile } from "../../components/ui/molecules";
+import { Space } from "@/constants/Space";
+import { Colors } from "@/constants";
 
-const explore = () => {
+export default function ExploreScreen() {
+  const colorScheme = useColorScheme();
+  const handleQuantityChange = (quantity: number) => {
+    console.log("Quantity changed:", quantity);
+  };
+
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">explore</ThemedText>
-    </ThemedView>
+    <ScrollView
+      style={[
+        styles.container,
+        { backgroundColor: Colors[colorScheme ?? "light"].background },
+      ]}
+    >
+      <ProductTile
+        title="Classic red pullover Hoodie"
+        price={152}
+        imageUrl="https://picsum.photos/200/300"
+        onQuantityChange={handleQuantityChange}
+        style={{ marginBottom: Space.$4 }}
+      />
+      <ProductTile
+        title="Classic red pullover Hoodie"
+        price={152}
+        imageUrl="https://picsum.photos/200/300"
+        onQuantityChange={handleQuantityChange}
+        style={{ marginBottom: Space.$4 }}
+      />
+      <ProductTile
+        title="Classic red pullover Hoodie"
+        price={152}
+        imageUrl="https://picsum.photos/200/300"
+        onQuantityChange={handleQuantityChange}
+        style={{ marginBottom: Space.$4 }}
+      />
+      <ProductTile
+        title="Classic red pullover Hoodie"
+        price={152}
+        imageUrl="https://picsum.photos/200/300"
+        onQuantityChange={handleQuantityChange}
+        style={{ marginBottom: Space.$4 }}
+      />
+    </ScrollView>
   );
-};
-
-export default explore;
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    padding: 16,
   },
 });

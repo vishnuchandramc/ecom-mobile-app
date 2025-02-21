@@ -8,6 +8,7 @@ export const Colors = {
     tabIconSelected: "#13161B",
     border: "#DDDDDD",
     tertiary: "#EFBB34",
+    error: "#D84040",
   },
   dark: {
     primary: "#ECEDEE",
@@ -17,5 +18,6 @@ export const Colors = {
     tabIconDefault: "#9BA1A6",
     tabIconSelected: "#ECEDEE",
     border: "#1e1e1f",
+    error: "#BE3144",
   },
 };

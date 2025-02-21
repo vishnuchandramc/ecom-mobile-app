@@ -2,9 +2,9 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import { ThemedView } from "@/components/ui/atoms/ThemedView";
 import { ThemedText } from "@/components/ui/atoms/ThemedText";
-import { Button } from "@/components/ui/molecules/Button";
 import { Space } from "@/constants/Space";
 import { Search } from "@/components/ui/molecules/Search";
+import { Button } from "@/components/ui/molecules";
 
 const index = () => {
   return (
@@ -18,14 +18,15 @@ const index = () => {
         </ThemedText>
         <Search onSearch={() => {}} onFilterPress={() => {}} />
       </View>
+
       <View style={styles.buttonContainer}>
-        <Button variant="primary" style={{ width: "100%" }} onPress={() => {}}>
+        <Button variant="primary" style={{}} onPress={() => {}}>
           Sign up with email
         </Button>
         <Button
           variant="secondary"
           onPress={() => {}}
-          style={{ marginTop: Space.$2, width: "100%" }}
+          style={{ marginTop: Space.$2 }}
         >
           Sign up with email
         </Button>
@@ -48,6 +49,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    paddingBottom: Space.$8,
+    paddingBottom: 100,
   },
 });

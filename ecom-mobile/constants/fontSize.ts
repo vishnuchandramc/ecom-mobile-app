@@ -4,7 +4,7 @@ export const fontSize = {
   small: 14,
 
   // Header text sizes
-  hero: 32,
+  hero: 28,
   title: 24,
   subtitle: 20,
 

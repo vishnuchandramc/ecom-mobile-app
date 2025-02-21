@@ -11,12 +11,14 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { useAuthStore } from "@/store/auth";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
   const [loaded] = useFonts({
     AtypText: require("../assets/fonts/AtypText-Regular.otf"),
     AtypTextBold: require("../assets/fonts/AtypText-Bold.otf"),
@@ -36,8 +38,23 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+            headerTitle: "",
+            title: "",
+            header: () => null,
+          }}
+          redirect={isAuthenticated}
+        />
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerShown: false }}
+          redirect={!isAuthenticated}
+        />
+
+        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

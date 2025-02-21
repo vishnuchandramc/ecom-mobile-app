@@ -6,12 +6,13 @@ export const Space = {
   $0: 2,
   $1: 4,
   $2: 8,
-  $3: 16,
-  $4: 20,
-  $5: 32,
-  $6: 48,
-  $7: 64,
-  $8: 96,
+  $3: 12,
+  $4: 16,
+  $5: 20,
+  $6: 24,
+  $7: 28,
+  $8: 32,
+  $9: 36,
 } as const;
 
 export type SpaceValue = keyof typeof Space;

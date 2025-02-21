@@ -4,19 +4,18 @@ import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ui/atoms/ThemedView";
 import { ThemedText } from "@/components/ui/atoms/ThemedText";
 
-export default function NotFoundScreen() {
+const NotFoundScreen = () => {
   return (
     <>
       <Stack.Screen options={{ title: "Oops!" }} />
       <ThemedView style={styles.container}>
         <ThemedText type="title">This screen doesn't exist.</ThemedText>
-        <Link href="/" style={styles.link}>
-          <ThemedText type="link">Go to home screen!</ThemedText>
-        </Link>
       </ThemedView>
     </>
   );
-}
+};
+
+export default NotFoundScreen;
 
 const styles = StyleSheet.create({
   container: {

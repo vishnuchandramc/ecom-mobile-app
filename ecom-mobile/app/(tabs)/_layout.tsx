@@ -8,54 +8,57 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import DiscoverIcon from "@/assets/icons/DiscoverIcon";
 import ProfileIcon from "@/assets/icons/ProfileIcon";
 import HomeIcon from "@/assets/icons/HomeIcon";
+import { ProtectedRoute } from "@/app/(auth)/ProtectedRoute";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
-        headerShown: false,
-        animation: "fade",
-        tabBarButton: HapticTab,
-        tabBarItemStyle: {
-          padding: 10,
-        },
-        tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: "AtypTextMedium",
-        },
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            position: "absolute",
+    <ProtectedRoute>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+          headerShown: false,
+          animation: "fade",
+          tabBarButton: HapticTab,
+          tabBarItemStyle: {
+            padding: 10,
           },
-          default: {},
-        }),
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => <HomeIcon size={22} color={color} />,
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontFamily: "AtypTextMedium",
+          },
+          tabBarBackground: TabBarBackground,
+          tabBarStyle: Platform.select({
+            ios: {
+              position: "absolute",
+            },
+            default: {},
+          }),
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color }) => <DiscoverIcon color={color} size={24} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <ProfileIcon size={28} color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color }) => <HomeIcon size={22} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="explore"
+          options={{
+            title: "Explore",
+            tabBarIcon: ({ color }) => <DiscoverIcon color={color} size={24} />,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            tabBarIcon: ({ color }) => <ProfileIcon size={28} color={color} />,
+          }}
+        />
+      </Tabs>
+    </ProtectedRoute>
   );
 }
