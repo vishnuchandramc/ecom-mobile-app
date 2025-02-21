@@ -84,7 +84,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
         style={[
           styles.marqueeContainer,
           {
-            width: containerWidth * 2, // Double width for duplicated images
+            width: containerWidth * 2,
           },
           animatedStyle,
         ]}

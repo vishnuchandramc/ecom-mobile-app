@@ -3,13 +3,23 @@ import React from "react";
 import { ThemedView } from "@/components/ui/atoms/ThemedView";
 import { ThemedText } from "@/components/ui/atoms/ThemedText";
 import { Space } from "@/constants/Space";
-import { Search } from "@/components/ui/molecules/Search";
-import { Button } from "@/components/ui/molecules";
 
 const index = () => {
   return (
     <ThemedView style={styles.container}>
-      <View style={styles.contentContainer}>
+      <ThemedText
+        style={{
+          fontSize: 24,
+          textAlign: "center",
+          paddingBottom: Space.$8,
+          paddingTop: Space.$4,
+          fontWeight: "bold",
+          fontFamily: "AtypTextBold",
+        }}
+      >
+        BLUME.
+      </ThemedText>
+      {/* <View style={styles.contentContainer}>
         <ThemedText
           type="hero"
           style={{ textAlign: "center", paddingVertical: Space.$3 }}
@@ -30,7 +40,7 @@ const index = () => {
         >
           Sign up with email
         </Button>
-      </View>
+      </View> */}
     </ThemedView>
   );
 };

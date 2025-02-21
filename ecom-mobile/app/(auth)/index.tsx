@@ -1,5 +1,5 @@
 import {
-  SafeAreaView,
+  Platform,
   StyleSheet,
   useColorScheme,
   useWindowDimensions,
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/molecules/Button";
 import { Space } from "@/constants/Space";
 import { Marquee } from "@/components/ui/organisms/Marquee";
 import { Colors } from "@/constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Auth = () => {
   const colorScheme = useColorScheme();
@@ -31,13 +32,13 @@ const Auth = () => {
         flex: 1,
         backgroundColor: Colors[colorScheme ?? "light"].background,
       }}
+      edges={["bottom", "top"]}
     >
       <ThemedView style={styles.container}>
         <ThemedText
           style={{
             fontSize: 24,
             textAlign: "center",
-            paddingBottom: Space.$8,
             paddingTop: Space.$4,
             fontWeight: "bold",
             fontFamily: "AtypTextBold",
@@ -56,7 +57,7 @@ const Auth = () => {
             height={width * 0.6}
             gap={Space.$5}
             speed={20000}
-            style={{ marginBottom: Space.$5 }}
+            style={{ marginBottom: Space.$8 }}
           />
           <ThemedText
             type="hero"
@@ -105,7 +106,7 @@ export default Auth;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Space.$3,
+    paddingHorizontal: Space.$5,
   },
   contentContainer: {
     flex: 1,
@@ -114,6 +115,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    paddingBottom: Space.$3,
+    paddingBottom: Platform.OS === "android" ? Space.$6 : Space.$3,
   },
 });

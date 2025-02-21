@@ -48,6 +48,5 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     marginTop: "auto",
-    marginBottom: 100,
   },
 });
