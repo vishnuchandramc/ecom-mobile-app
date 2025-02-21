@@ -12,7 +12,7 @@ const index = () => {
       <View style={styles.contentContainer}>
         <ThemedText
           type="hero"
-          style={{ textAlign: "center", paddingVertical: Space.sm }}
+          style={{ textAlign: "center", paddingVertical: Space.$3 }}
         >
           Discover your next favourite in our latest collection.
         </ThemedText>
@@ -25,7 +25,7 @@ const index = () => {
         <Button
           variant="secondary"
           onPress={() => {}}
-          style={{ marginTop: Space.sm, width: "100%" }}
+          style={{ marginTop: Space.$2, width: "100%" }}
         >
           Sign up with email
         </Button>
@@ -39,7 +39,7 @@ export default index;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Space.sm,
+    paddingHorizontal: Space.$3,
   },
   contentContainer: {
     flex: 1,
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    paddingBottom: Space.xxxl,
+    paddingBottom: Space.$8,
   },
 });

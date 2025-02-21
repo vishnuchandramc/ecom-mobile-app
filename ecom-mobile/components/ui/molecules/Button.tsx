@@ -11,6 +11,7 @@ import { ThemedText } from "../atoms/ThemedText";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors } from "@/constants/Colors";
 import { Space, BorderRadius } from "@/constants/Space";
+import { fontSize } from "@/constants/fontSize";
 
 interface ButtonProps {
   variant?: "primary" | "secondary" | "tertiary";
@@ -79,27 +80,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: Space.md,
-    paddingHorizontal: Space.md,
+    paddingVertical: Space.$5,
+    paddingHorizontal: Space.$5,
     borderRadius: BorderRadius.rounded,
-    minHeight: Space.xl,
+    minHeight: Space.$8,
   },
   secondaryContainer: {
     backgroundColor: "transparent",
-    borderWidth: Space.xxxs,
-    paddingVertical: Space.sm,
-    paddingHorizontal: Space.md,
+    borderWidth: Space.$1,
+    paddingVertical: Space.$3,
+    paddingHorizontal: Space.$4,
   },
   tertiaryContainer: {
     backgroundColor: "transparent",
     paddingHorizontal: 0,
-    minHeight: Space.lg,
+    minHeight: Space.$7,
   },
   disabled: {
     opacity: 0.5,
   },
   text: {
-    fontSize: 16,
+    fontSize: fontSize.default,
     fontFamily: "AtypTextMedium",
     textAlign: "center",
   },
@@ -107,9 +108,9 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   iconLeading: {
-    marginRight: Space.xs,
+    marginRight: Space.$2,
   },
   iconTrailing: {
-    marginLeft: Space.xs,
+    marginLeft: Space.$2,
   },
 });

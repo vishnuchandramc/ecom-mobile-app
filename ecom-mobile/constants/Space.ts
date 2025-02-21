@@ -3,15 +3,15 @@
  * Uses a scale-based system where each value is generally 2x the previous
  */
 export const Space = {
-  xxxs: 2,
-  xxs: 4,
-  xs: 8,
-  sm: 16,
-  md: 20,
-  lg: 32,
-  xl: 48,
-  xxl: 64,
-  xxxl: 96,
+  $0: 2,
+  $1: 4,
+  $2: 8,
+  $3: 16,
+  $4: 20,
+  $5: 32,
+  $6: 48,
+  $7: 64,
+  $8: 96,
 } as const;
 
 export type SpaceValue = keyof typeof Space;

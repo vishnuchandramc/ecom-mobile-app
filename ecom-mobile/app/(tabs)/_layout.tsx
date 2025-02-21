@@ -24,7 +24,7 @@ export default function TabLayout() {
         },
         tabBarLabelStyle: {
           fontSize: 12,
-          fontFamily: "AtypText-Medium",
+          fontFamily: "AtypTextMedium",
         },
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
