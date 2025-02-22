@@ -38,10 +38,11 @@ const Auth = () => {
         <View style={styles.contentContainer}>
           <Marquee
             images={[
-              "https://picsum.photos/id/870/200/300?grayscale&blur=2&random=1",
-              "https://picsum.photos/id/870/200/300?grayscale&random=4",
-              "https://picsum.photos/200/300?grayscale",
-              "https://fastly.picsum.photos/id/22/4434/3729.jpg?hmac=fjZdkSMZJNFgsoDh8Qo5zdA_nSGUAWvKLyyqmEt2xs0",
+              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image1.jpg?raw=true",
+              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image2.jpg?raw=true",
+              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image3.jpg?raw=true",
+              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true",
+              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image5.jpg?raw=true",
             ]}
             height={width * 0.6}
             gap={Space.$5}

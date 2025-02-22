@@ -46,7 +46,7 @@ const index = () => {
       <ThemedView>
         <Carousel
           images={[
-            "https://picsum.photos/id/870/200/300?grayscale&blur=2&random=1",
+            "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true"
           ]}
           activeIndicatorColor={Colors[colorScheme ?? "light"].primary}
           indicatorColor={Colors[colorScheme ?? "light"].primary}
@@ -130,7 +130,7 @@ const index = () => {
       </ThemedView>
       <ThemedView style={styles.contentContainer}>
         <Search
-          onSearch={() => {}}
+          onSearch={() => { }}
           showFilter={false}
           isClickable={true}
           inputStyle={{ paddingVertical: Space.$1 }}
