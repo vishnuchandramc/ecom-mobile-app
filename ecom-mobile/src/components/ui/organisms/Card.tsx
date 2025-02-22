@@ -1,8 +1,8 @@
 import {
   ImageStyle,
+  Pressable,
   StyleProp,
   StyleSheet,
-  TouchableOpacity,
   useColorScheme,
   ViewStyle,
 } from "react-native";
@@ -67,7 +67,7 @@ const Card = ({
   };
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <Pressable onPress={onPress}>
       <ThemedView
         style={[
           styles.container,
@@ -99,7 +99,7 @@ const Card = ({
           {renderATCButton()}
         </ThemedView>
       </ThemedView>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

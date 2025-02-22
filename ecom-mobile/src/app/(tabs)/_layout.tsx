@@ -4,7 +4,7 @@ import { ThemedView } from "@/components/ui/atoms";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { HapticTab } from "@/components/ui/atoms/Haptic";
 import TabBarBackground from "@/components/ui/organisms/TabBarBackground";
-import { Colors } from "@/constants";
+import { Colors, Space } from "@/constants";
 import { useColorScheme } from "react-native";
 import HomeIcon from "@/assets/icons/HomeIcon";
 import DiscoverIcon from "@/assets/icons/DiscoverIcon";
@@ -38,6 +38,7 @@ export default function TabLayout() {
             tabBarLabelStyle: {
               fontSize: 12,
               fontFamily: "AtypTextMedium",
+              paddingVertical: Space.$2,
             },
             tabBarBackground: TabBarBackground,
             tabBarStyle: {

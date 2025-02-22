@@ -8,9 +8,12 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useAuthStore } from "@/store/auth";
+import { CartToast } from "@/components/ui/molecules/CartToast";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -35,28 +38,33 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen
-          name="(auth)"
-          options={{
-            headerShown: false,
-            headerTitle: "",
-            title: "",
-            header: () => null,
-          }}
-          redirect={isAuthenticated}
-        />
-        <Stack.Screen
-          name="(tabs)"
-          options={{ headerShown: false }}
-          redirect={!isAuthenticated}
-        />
-        <Stack.Screen name="(other)" options={{ headerShown: false }} />
+    <SafeAreaProvider>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        <View style={{ flex: 1 }}>
+          <Stack>
+            <Stack.Screen
+              name="(auth)"
+              options={{
+                headerShown: false,
+                headerTitle: "",
+                title: "",
+                header: () => null,
+              }}
+              redirect={isAuthenticated}
+            />
+            <Stack.Screen
+              name="(tabs)"
+              options={{ headerShown: false }}
+              redirect={!isAuthenticated}
+            />
+            <Stack.Screen name="(other)" options={{ headerShown: false }} />
 
-        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+            <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+          </Stack>
+          <StatusBar style="auto" />
+          <CartToast />
+        </View>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }

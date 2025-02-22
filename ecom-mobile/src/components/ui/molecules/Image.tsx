@@ -25,6 +25,8 @@ const Image: React.FC<ImageProps> = ({
       style={[styles.image, style]}
       contentFit={contentFit}
       transition={transition}
+      placeholder={require("@/assets/images/placeholder.png")}
+      placeholderContentFit="cover"
       {...props}
     />
   );
