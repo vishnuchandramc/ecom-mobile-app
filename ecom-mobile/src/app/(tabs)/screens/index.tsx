@@ -112,15 +112,25 @@ const index = () => {
           title="BLUME."
           titleStyle={styles.title}
           rightIcon={
-            <CartIcon
-              color={Colors[colorScheme ?? "light"].primary}
-              size={Space.$5}
-            />
+            <ThemedView style={{ padding: Space.$1 }}>
+              <CartIcon
+                color={Colors[colorScheme ?? "light"].primary}
+                size={Space.$5}
+              />
+            </ThemedView>
           }
         />
       </ThemedView>
       <ThemedView style={styles.contentContainer}>
-        <Search onSearch={() => {}} showFilter={false} />
+        <Search
+          onSearch={() => {}}
+          showFilter={false}
+          isClickable={true}
+          inputStyle={{ paddingVertical: Space.$1 }}
+          onPress={() => {
+            router.navigate("/screens/explore");
+          }}
+        />
       </ThemedView>
       <FlashList
         data={categories}

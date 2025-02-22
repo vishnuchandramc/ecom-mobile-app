@@ -7,11 +7,13 @@ import {
   TextStyle,
   StyleProp,
   TouchableOpacity,
+  Pressable,
 } from "react-native";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { Colors, Space, BorderRadius } from "@/constants";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import FilterIcon from "@/assets/icons/FilterIcon";
+import { ThemedView } from "../atoms";
 
 interface SearchProps {
   onSearch?: (text: string) => void;
@@ -24,6 +26,8 @@ interface SearchProps {
   value?: string;
   onChangeText?: (text: string) => void;
   placeholder?: string;
+  isClickable?: boolean;
+  onPress?: () => void;
 }
 
 export const Search: React.FC<SearchProps> = ({
@@ -37,6 +41,8 @@ export const Search: React.FC<SearchProps> = ({
   value,
   onChangeText,
   placeholder = "Search",
+  isClickable = false,
+  onPress,
 }) => {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? "light"];
@@ -48,16 +54,9 @@ export const Search: React.FC<SearchProps> = ({
     }
   };
 
-  return (
-    <View
-      style={[
-        styles.container,
-        { borderColor: colors.primary },
-        containerStyle,
-      ]}
-    >
+  const searchContent = (
+    <>
       <SearchIcon size={20} color={defaultIconColor} />
-
       <TextInput
         style={[
           styles.input,
@@ -69,14 +68,47 @@ export const Search: React.FC<SearchProps> = ({
         value={value}
         onChangeText={onChangeText}
         onSubmitEditing={handleSubmit}
+        editable={!isClickable}
+        pointerEvents={isClickable ? "none" : "auto"}
       />
-
       {showFilter && (
-        <TouchableOpacity onPress={onFilterPress} style={styles.filterButton}>
+        <TouchableOpacity
+          onPress={isClickable ? undefined : onFilterPress}
+          style={styles.filterButton}
+          disabled={isClickable}
+        >
           <FilterIcon size={20} color={defaultIconColor} />
         </TouchableOpacity>
       )}
-    </View>
+    </>
+  );
+
+  if (isClickable) {
+    return (
+      <Pressable onPress={onPress}>
+        <ThemedView
+          style={[
+            styles.container,
+            { borderColor: colors.primary },
+            containerStyle,
+          ]}
+        >
+          {searchContent}
+        </ThemedView>
+      </Pressable>
+    );
+  }
+
+  return (
+    <ThemedView
+      style={[
+        styles.container,
+        { borderColor: colors.primary },
+        containerStyle,
+      ]}
+    >
+      {searchContent}
+    </ThemedView>
   );
 };
 
