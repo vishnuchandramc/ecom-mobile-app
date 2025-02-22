@@ -1,37 +1,83 @@
-import { useState, useEffect } from "react";
-import { Category } from "../../models/CategoriesModel";
+import { useState, useEffect, useCallback } from "react";
 import { Endpoints } from "@/constants/Endpoints";
 import { fetchWrapper } from "@/services/fetchWrapper";
+import { Product } from "@/models/ProductModel";
 
-export const useProductListing = () => {
-  const [products, setProducts] = useState<Category[]>([]);
+const LIMIT = 10;
+
+interface ProductListingParams {
+  categoryId?: number;
+}
+
+export const useProductListing = (params?: ProductListingParams) => {
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [offset, setOffset] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
+  const fetchProducts = useCallback(
+    async (currentOffset: number, append = false) => {
       try {
-        setIsLoading(true);
-        const response = await fetchWrapper.get(Endpoints.PRODUCTS);
+        const categoryFilter = params?.categoryId
+          ? `&categoryId=${params.categoryId}`
+          : "";
+        const response = await fetchWrapper.get(
+          `${Endpoints.PRODUCTS}?offset=${currentOffset}&limit=${LIMIT}${categoryFilter}`
+        );
 
-        setProducts(response);
+        if (response.length < LIMIT) {
+          setHasMore(false);
+        }
+
+        setProducts((prev) => (append ? [...prev, ...response] : response));
         setError(null);
       } catch (err) {
         setError(
-          err instanceof Error ? err.message : "Failed to fetch categories"
+          err instanceof Error ? err.message : "Failed to fetch products"
         );
-        setProducts([]);
-      } finally {
-        setIsLoading(false);
+        if (!append) {
+          setProducts([]);
+        }
       }
-    };
+    },
+    [params?.categoryId]
+  );
 
-    fetchProducts();
-  }, []);
+  // Initial load
+  useEffect(() => {
+    setIsLoading(true);
+    fetchProducts(0).finally(() => setIsLoading(false));
+  }, [params?.categoryId]);
+
+  const loadMore = async () => {
+    if (isLoadingMore || !hasMore) return;
+
+    setIsLoadingMore(true);
+    const nextOffset = offset + LIMIT;
+    setOffset(nextOffset);
+
+    await fetchProducts(nextOffset, true);
+    setIsLoadingMore(false);
+  };
+
+  const refresh = async () => {
+    setIsRefreshing(true);
+    setOffset(0);
+    setHasMore(true);
+    await fetchProducts(0);
+    setIsRefreshing(false);
+  };
 
   return {
     products,
     isLoading,
     error,
+    loadMore,
+    isLoadingMore,
+    refresh,
+    isRefreshing,
   };
 };

@@ -14,10 +14,3 @@ export interface Product {
   category: Category;
   images: string[];
 }
-
-export interface ProductResponse {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-}

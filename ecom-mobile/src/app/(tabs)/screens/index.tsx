@@ -17,6 +17,7 @@ import { FlashList } from "@shopify/flash-list";
 import Card from "@/components/ui/organisms/Card";
 import TitleContainer from "@/components/ui/molecules/TitleContainer";
 import Footer from "@/components/ui/organisms/Footer";
+import { router } from "expo-router";
 
 const index = () => {
   const colorScheme = useColorScheme();
@@ -71,7 +72,9 @@ const index = () => {
           >
             <Button
               variant="tertiary"
-              onPress={() => {}}
+              onPress={() => {
+                router.navigate("/screens/explore");
+              }}
               textStyle={{
                 color: Colors["dark"].primary,
               }}
@@ -130,6 +133,9 @@ const index = () => {
               title={item.name}
               imageUrl={item.image}
               style={{ borderWidth: 1 }}
+              onPress={() => {
+                router.navigate(`/(other)/CategoryList?categoryId=${item.id}`);
+              }}
             />
           </ThemedView>
         )}

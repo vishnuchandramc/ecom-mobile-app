@@ -52,6 +52,7 @@ export default function RootLayout() {
           options={{ headerShown: false }}
           redirect={!isAuthenticated}
         />
+        <Stack.Screen name="(other)" options={{ headerShown: false }} />
 
         <Stack.Screen name="+not-found" options={{ headerShown: false }} />
       </Stack>
