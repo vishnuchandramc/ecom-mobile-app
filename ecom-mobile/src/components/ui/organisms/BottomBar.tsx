@@ -21,13 +21,7 @@ export const BottomBar = ({ item }: BottomBarProps) => {
   );
 
   const cartStore = useCartStore();
-  const onIncrement = () =>
-    cartStore.addItem({
-      id: item.id.toString(),
-      name: item.title,
-      image: item.images[0],
-      price: item.price,
-    });
+  const onIncrement = () => cartStore.addItem(item);
   const onDecrement = () => cartStore.removeItem(item.id.toString());
 
   return (

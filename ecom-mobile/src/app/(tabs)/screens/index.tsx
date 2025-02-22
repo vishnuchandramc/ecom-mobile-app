@@ -1,5 +1,6 @@
 import {
   ActivityIndicator,
+  Pressable,
   StyleSheet,
   useColorScheme,
   useWindowDimensions,
@@ -112,12 +113,18 @@ const index = () => {
           title="BLUME."
           titleStyle={styles.title}
           rightIcon={
-            <ThemedView style={{ padding: Space.$1 }}>
-              <CartIcon
-                color={Colors[colorScheme ?? "light"].primary}
-                size={Space.$5}
-              />
-            </ThemedView>
+            <Pressable
+              onPress={() => {
+                router.navigate(`/(other)/Cart`);
+              }}
+            >
+              <ThemedView style={{ padding: Space.$1 }}>
+                <CartIcon
+                  color={Colors[colorScheme ?? "light"].primary}
+                  size={Space.$5}
+                />
+              </ThemedView>
+            </Pressable>
           }
         />
       </ThemedView>

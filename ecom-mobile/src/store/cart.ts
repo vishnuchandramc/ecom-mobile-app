@@ -1,21 +1,20 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Product } from "@/models/ProductModel";
 
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
+interface CartItem extends Product {
   quantity: number;
-  image: string;
 }
 
 interface CartStore {
   items: CartItem[];
   totalItems: number;
+  totalPrice: number;
   addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (itemId: string) => void;
   getItemQuantity: (itemId: string) => number;
+  initializeCart: () => void;
 }
 
 const useCartStore = create<CartStore>()(
@@ -23,51 +22,81 @@ const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
       totalItems: 0,
+      totalPrice: 0,
 
       addItem: (item) =>
         set((state) => {
           const existingItem = state.items.find((i) => i.id === item.id);
+          const newTotalItems = state.totalItems + 1;
+          const newTotalPrice = state.totalPrice + Number(item.price);
 
           if (existingItem) {
             return {
               items: state.items.map((i) =>
                 i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
               ),
-              totalItems: state.totalItems + 1,
+              totalItems: newTotalItems,
+              totalPrice: Math.max(0, newTotalPrice),
             };
           }
 
           return {
             items: [...state.items, { ...item, quantity: 1 }],
-            totalItems: state.totalItems + 1,
+            totalItems: newTotalItems,
+            totalPrice: Math.max(0, newTotalPrice),
           };
         }),
 
       removeItem: (itemId) =>
         set((state) => {
-          const item = state.items.find((i) => i.id === itemId);
+          const item = state.items.find((i) => i.id === Number(itemId));
           if (!item) return state;
+
+          const newTotalItems = Math.max(0, state.totalItems - 1);
+          const newTotalPrice = Math.max(
+            0,
+            state.totalPrice - Number(item.price)
+          );
 
           if (item.quantity === 1) {
             return {
-              items: state.items.filter((i) => i.id !== itemId),
-              totalItems: state.totalItems - 1,
+              items: state.items.filter((i) => i.id !== Number(itemId)),
+              totalItems: newTotalItems,
+              totalPrice: newTotalPrice,
             };
           }
 
           return {
             items: state.items.map((i) =>
-              i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
+              i.id === Number(itemId) ? { ...i, quantity: i.quantity - 1 } : i
             ),
-            totalItems: state.totalItems - 1,
+            totalItems: newTotalItems,
+            totalPrice: newTotalPrice,
           };
         }),
 
-      clearCart: () => set({ items: [], totalItems: 0 }),
+      clearCart: () => set({ items: [], totalItems: 0, totalPrice: 0 }),
 
       getItemQuantity: (itemId) => {
-        const item = get().items.find((i) => i.id === itemId);
+        const item = get().items.find((i) => i.id === Number(itemId));
         return item?.quantity || 0;
+      },
+
+      initializeCart: () => {
+        const items = get().items;
+        const totalItems = Math.max(
+          0,
+          items.reduce((sum, item) => sum + item.quantity, 0)
+        );
+        const totalPrice = Math.max(
+          0,
+          items.reduce(
+            (sum, item) => sum + Number(item.price) * item.quantity,
+            0
+          )
+        );
+
+        set({ items, totalItems, totalPrice });
       },
     }),
     {

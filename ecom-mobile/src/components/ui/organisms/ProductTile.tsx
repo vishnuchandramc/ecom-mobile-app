@@ -11,30 +11,29 @@ import { ThemedView } from "../atoms/ThemedView";
 import { ThemedText } from "../atoms/ThemedText";
 import { CounterButton } from "../molecules/CounterButton";
 import { BorderRadius, Colors, Space } from "@/constants";
+import useCartStore from "@/store/cart";
+import { Product } from "@/models/ProductModel";
 
 interface ProductTileProps {
-  title: string;
-  price: number;
-  imageUrl: string;
-  onQuantityChange?: (quantity: number) => void;
+  item: Product;
   style?: StyleProp<ViewStyle>;
 }
 
-export const ProductTile: React.FC<ProductTileProps> = ({
-  title,
-  price,
-  imageUrl,
-  onQuantityChange,
-  style,
-}) => {
+export const ProductTile: React.FC<ProductTileProps> = ({ item, style }) => {
   const colorScheme = useColorScheme();
-  const [quantity, setQuantity] = useState(1);
+  const { addItem, removeItem } = useCartStore();
+  const { id = 0, title, category, price, images = [], description } = item;
+  const strId = id.toString();
+  const counter = useCartStore((state) => state.getItemQuantity(strId));
+
   const onIncrement = () => {
-    setQuantity(quantity + 1);
+    addItem(item);
   };
+
   const onDecrement = () => {
-    setQuantity(quantity - 1);
+    removeItem(strId);
   };
+
   return (
     <ThemedView
       style={[
@@ -43,7 +42,7 @@ export const ProductTile: React.FC<ProductTileProps> = ({
         style,
       ]}
     >
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <Image source={{ uri: images[0] ?? "" }} style={styles.image} />
       <ThemedView style={styles.rightContent}>
         <ThemedView style={styles.content}>
           <ThemedText type="default" style={styles.title}>
@@ -55,7 +54,7 @@ export const ProductTile: React.FC<ProductTileProps> = ({
         </ThemedView>
         <ThemedView style={styles.counterContainer}>
           <CounterButton
-            value={quantity}
+            value={counter}
             onIncrement={onIncrement}
             onDecrement={onDecrement}
             style={styles.counter}
