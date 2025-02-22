@@ -18,6 +18,7 @@ export const Colors = {
     tabIconDefault: "#9BA1A6",
     tabIconSelected: "#ECEDEE",
     border: "#1e1e1f",
+    tertiary: "#EFBB34",
     error: "#BE3144",
   },
 };

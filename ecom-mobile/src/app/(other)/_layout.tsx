@@ -9,6 +9,7 @@ export default function OtherLayout() {
       }}
     >
       <Stack.Screen name="CategoryList" options={{ headerShown: false }} />
+      <Stack.Screen name="Details" options={{ headerShown: false }} />
     </Stack>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   StyleSheet,
   useColorScheme,
@@ -12,9 +12,13 @@ import Header from "@/components/ui/molecules/Header";
 import { FlashList } from "@shopify/flash-list";
 import Card from "@/components/ui/organisms/Card";
 import { Search } from "@/components/ui/molecules";
+import useCartStore from "@/store/cart";
+import { Product } from "@/models/ProductModel";
 
 const ExploreScreen = () => {
   const colorScheme = useColorScheme();
+  const counter = useCartStore((state) => state.totalItems);
+  const cartStore = useCartStore();
   const {
     products,
     isLoading,
@@ -41,6 +45,15 @@ const ExploreScreen = () => {
     );
   }
 
+  const handleCart = (item: Product) => {
+    cartStore.addItem({
+      id: String(item.id),
+      name: item.title,
+      price: item.price,
+      image: item.images[0],
+    });
+  };
+
   return (
     <ThemedView style={styles.container}>
       <Header title="Explore" />
@@ -64,7 +77,7 @@ const ExploreScreen = () => {
               imageUrl={item.images[0]}
               subtitle={`${item.price}`}
               imageStyle={{ height: 350 }}
-              onAddToCart={() => {}}
+              onAddToCart={() => handleCart(item)}
               chipTitle={item.category.name}
               chipStyle={{
                 backgroundColor: Colors[colorScheme ?? "light"].background,
