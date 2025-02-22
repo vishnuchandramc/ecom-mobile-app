@@ -89,9 +89,8 @@ export const useSignUp = () => {
         password: form.password,
       });
 
-      if (response.access_token) {
-        setAuth(response);
-        router.replace("/(tabs)/screens");
+      if (response.id) {
+        router.replace("/(auth)/screens/Login");
       } else {
         setError("Invalid response from server");
       }

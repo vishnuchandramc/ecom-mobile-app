@@ -16,6 +16,14 @@ interface AuthResponse {
   refresh_token: string;
 }
 
+interface SignUpResponse {
+  name: string;
+  email: string;
+  avatar: string;
+  role: string;
+  id: string;
+}
+
 export class AuthService {
   static async login(credentials: LoginCredentials): Promise<AuthResponse> {
     try {
@@ -27,7 +35,7 @@ export class AuthService {
     }
   }
 
-  static async signup(data: SignupData): Promise<AuthResponse> {
+  static async signup(data: SignupData): Promise<SignUpResponse> {
     try {
       console.log("Signup request:", data);
       return await fetchWrapper.post(Endpoints.AUTH.SIGNUP, {
