@@ -12,7 +12,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     clearAuth();
-    router.replace("/(auth)");
+    router.replace("/(auth)/screens");
   };
 
   return (

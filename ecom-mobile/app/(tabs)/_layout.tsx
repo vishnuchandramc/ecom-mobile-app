@@ -1,6 +1,5 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
 import { HapticTab } from "@/components/ui/atoms/Haptic";
 import TabBarBackground from "@/components/ui/organisms/TabBarBackground";
 import { Colors } from "@/constants/Colors";
@@ -9,19 +8,22 @@ import DiscoverIcon from "@/assets/icons/DiscoverIcon";
 import ProfileIcon from "@/assets/icons/ProfileIcon";
 import HomeIcon from "@/assets/icons/HomeIcon";
 import { ProtectedRoute } from "@/app/(auth)/ProtectedRoute";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemedView } from "@/components/ui/atoms";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  const { top, bottom } = useSafeAreaInsets();
+
   return (
     <ProtectedRoute>
-      <SafeAreaView
+      <ThemedView
         style={{
           flex: 1,
           backgroundColor: Colors[colorScheme ?? "light"].background,
+          paddingTop: top,
         }}
-        edges={["bottom", "top"]}
       >
         <Tabs
           screenOptions={{
@@ -41,7 +43,8 @@ export default function TabLayout() {
               backgroundColor: Colors[colorScheme ?? "light"].background,
               borderTopWidth: 0,
               elevation: 0,
-              height: 60,
+              height: 60 + bottom,
+              paddingBottom: bottom,
             },
           }}
         >
@@ -71,7 +74,7 @@ export default function TabLayout() {
             }}
           />
         </Tabs>
-      </SafeAreaView>
+      </ThemedView>
     </ProtectedRoute>
   );
 }

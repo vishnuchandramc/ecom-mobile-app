@@ -5,7 +5,7 @@ export default function AuthLayout() {
   return (
     <View style={{ flex: 1 }}>
       <Stack
-        initialRouteName="index"
+        initialRouteName="screens/index"
         screenOptions={{
           headerShown: false,
           contentStyle: {
@@ -13,9 +13,9 @@ export default function AuthLayout() {
           },
         }}
       >
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="Login" options={{ headerShown: false }} />
-        <Stack.Screen name="Signup" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/index" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/Login" options={{ headerShown: false }} />
+        <Stack.Screen name="screens/Signup" options={{ headerShown: false }} />
       </Stack>
     </View>
   );

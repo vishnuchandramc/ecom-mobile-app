@@ -1,17 +1,18 @@
 import { StyleSheet, useColorScheme, Animated } from "react-native";
-import React from "react";
-import ThemedInput from "../../components/ui/atoms/ThemedInput";
-import { router } from "expo-router";
+import React, { useState } from "react";
+import ThemedInput from "../../../components/ui/atoms/ThemedInput";
+import { Link, router } from "expo-router";
 import { ThemedText, ThemedView } from "@/components/ui/atoms";
 import { Button } from "@/components/ui/molecules";
 import { Colors, Space } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";
-import { useLogin } from "@/hooks/auth/useLogin";
+import { useSignUp } from "@/hooks/auth/useSignUp";
 
-const Login = () => {
+const Signup = () => {
   const colorScheme = useColorScheme();
   const { form, formErrors, loading, error, handleChange, handleSubmit } =
-    useLogin();
+    useSignUp();
+  const [buttonScale] = useState(new Animated.Value(1));
 
   return (
     <ThemedView
@@ -28,16 +29,22 @@ const Login = () => {
         <Ionicons
           name="close"
           size={24}
-          color={Colors[colorScheme ?? "light"].primary}
+          color={Colors[colorScheme ?? "light"].icon}
         />
       </Button>
 
       <ThemedText type="title" style={[styles.title]}>
-        Welcome Back
+        Create Account
       </ThemedText>
       <ThemedText type="default" style={[styles.subtitle]}>
-        Login with your email and password
+        Create account using your email and password
       </ThemedText>
+
+      <ThemedInput
+        placeholder="Full Name"
+        value={form.name}
+        onChangeText={handleChange("name")}
+      />
 
       <ThemedInput
         placeholder="Email"
@@ -56,6 +63,14 @@ const Login = () => {
         error={formErrors.password ?? undefined}
       />
 
+      <ThemedInput
+        placeholder="Confirm Password"
+        value={form.confirmPassword}
+        onChangeText={handleChange("confirmPassword")}
+        secureTextEntry
+        error={formErrors.confirmPassword ?? undefined}
+      />
+
       {error && (
         <ThemedText
           type="default"
@@ -68,16 +83,18 @@ const Login = () => {
         </ThemedText>
       )}
 
-      <Button
-        variant="primary"
-        style={styles.button}
-        onPress={handleSubmit}
-        disabled={
-          loading || Object.values(formErrors).some((error) => error !== null)
-        }
-      >
-        {loading ? "Loading..." : "Login"}
-      </Button>
+      <Animated.View style={{ transform: [{ scale: buttonScale }] }}>
+        <Button
+          variant="primary"
+          style={styles.button}
+          onPress={handleSubmit}
+          disabled={
+            loading || Object.values(formErrors).some((error) => error !== null)
+          }
+        >
+          {loading ? "Loading..." : "Sign Up"}
+        </Button>
+      </Animated.View>
 
       <ThemedView
         style={[
@@ -89,26 +106,24 @@ const Login = () => {
           type="default"
           style={[{ color: Colors[colorScheme ?? "light"].primary }]}
         >
-          Don't have an account?{" "}
+          Already have an account?{" "}
         </ThemedText>
-        <Button
-          variant="tertiary"
-          style={styles.link}
-          onPress={() => router.push("/(auth)/Signup")}
-        >
-          Sign up
-        </Button>
+        <Link href="./Login" asChild>
+          <Button variant="tertiary" style={styles.link}>
+            Login here
+          </Button>
+        </Link>
       </ThemedView>
     </ThemedView>
   );
 };
 
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: Space.$4,
+    padding: Space.$5,
     justifyContent: "center",
   },
   closeButton: {
@@ -116,7 +131,7 @@ const styles = StyleSheet.create({
     top: 60,
     right: 40,
     zIndex: 1,
-    padding: Space.$2,
+    padding: 8,
   },
   title: {
     marginBottom: Space.$2,
@@ -135,14 +150,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: Space.$4,
+    marginTop: Space.$6,
   },
   link: {
     paddingVertical: 0,
     paddingHorizontal: 0,
   },
   error: {
-    marginTop: Space.$2,
     marginBottom: Space.$4,
     textAlign: "center",
   },

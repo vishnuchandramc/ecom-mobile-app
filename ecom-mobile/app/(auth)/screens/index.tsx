@@ -13,17 +13,18 @@ import { Space } from "@/constants/Space";
 import { Marquee } from "@/components/ui/organisms/Marquee";
 import { Colors } from "@/constants";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Header from "@/components/ui/molecules/Header";
 
 const Auth = () => {
   const colorScheme = useColorScheme();
   const { width } = useWindowDimensions();
 
   const handleSignUp = () => {
-    router.navigate("/(auth)/Signup");
+    router.navigate("./screens/Signup");
   };
 
   const handleLogin = () => {
-    router.navigate("/(auth)/Login");
+    router.navigate("/(auth)/screens/Login");
   };
 
   return (
@@ -35,17 +36,7 @@ const Auth = () => {
       edges={["bottom", "top"]}
     >
       <ThemedView style={styles.container}>
-        <ThemedText
-          style={{
-            fontSize: 24,
-            textAlign: "center",
-            paddingTop: Space.$4,
-            fontWeight: "bold",
-            fontFamily: "AtypTextBold",
-          }}
-        >
-          BLUME.
-        </ThemedText>
+        <Header title="BLUME." titleStyle={styles.title} />
         <View style={styles.contentContainer}>
           <Marquee
             images={[
@@ -108,6 +99,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Space.$5,
   },
+  title: {
+    fontFamily: "AtypTextBold",
+  },
   contentContainer: {
     flex: 1,
     justifyContent: "center",
@@ -115,6 +109,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    paddingBottom: Platform.OS === "android" ? Space.$6 : Space.$3,
+    paddingBottom: Platform.OS === "android" ? Space.$4 : Space.$3,
   },
 });
