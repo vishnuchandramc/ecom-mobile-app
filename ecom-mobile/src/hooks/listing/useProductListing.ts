@@ -7,6 +7,7 @@ const LIMIT = 10;
 
 interface ProductListingParams {
   categoryId?: number;
+  keyword?: string;
 }
 
 export const useProductListing = (params?: ProductListingParams) => {
@@ -24,8 +25,10 @@ export const useProductListing = (params?: ProductListingParams) => {
         const categoryFilter = params?.categoryId
           ? `&categoryId=${params.categoryId}`
           : "";
+        const keywordFilter = params?.keyword ? `&title=${params.keyword}` : "";
+
         const response = await fetchWrapper.get(
-          `${Endpoints.PRODUCTS}?offset=${currentOffset}&limit=${LIMIT}${categoryFilter}`
+          `${Endpoints.PRODUCTS}?offset=${currentOffset}&limit=${LIMIT}${categoryFilter}${keywordFilter}`
         );
 
         if (response.length < LIMIT) {
@@ -43,14 +46,14 @@ export const useProductListing = (params?: ProductListingParams) => {
         }
       }
     },
-    [params?.categoryId]
+    [params?.categoryId, params?.keyword]
   );
 
   // Initial load
   useEffect(() => {
     setIsLoading(true);
     fetchProducts(0).finally(() => setIsLoading(false));
-  }, [params?.categoryId]);
+  }, [params?.categoryId, params?.keyword]);
 
   const loadMore = async () => {
     if (isLoadingMore || !hasMore) return;

@@ -14,7 +14,7 @@ interface CartStore {
   addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (itemId: string) => void;
   getItemQuantity: (itemId: string) => number;
-  initializeCart: () => void;
+  clearCart: () => void;
 }
 
 const useCartStore = create<CartStore>()(
@@ -80,23 +80,6 @@ const useCartStore = create<CartStore>()(
       getItemQuantity: (itemId) => {
         const item = get().items.find((i) => i.id === Number(itemId));
         return item?.quantity || 0;
-      },
-
-      initializeCart: () => {
-        const items = get().items;
-        const totalItems = Math.max(
-          0,
-          items.reduce((sum, item) => sum + item.quantity, 0)
-        );
-        const totalPrice = Math.max(
-          0,
-          items.reduce(
-            (sum, item) => sum + Number(item.price) * item.quantity,
-            0
-          )
-        );
-
-        set({ items, totalItems, totalPrice });
       },
     }),
     {

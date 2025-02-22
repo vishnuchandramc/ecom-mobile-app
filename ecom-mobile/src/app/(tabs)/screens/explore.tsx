@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, ActivityIndicator, Text } from "react-native";
 import { useProductListing } from "@/hooks/listing/useProductListing";
 import { Space } from "@/constants";
@@ -9,6 +9,8 @@ import { Search } from "@/components/ui/molecules";
 import ProductItem from "@/components/ui/organisms/Product";
 
 const ExploreScreen = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const {
     products,
     isLoading,
@@ -17,7 +19,16 @@ const ExploreScreen = () => {
     isLoadingMore,
     refresh,
     isRefreshing,
-  } = useProductListing();
+  } = useProductListing({ keyword: searchQuery });
+
+  const handleSearch = (text: string) => {
+    setSearchQuery(text); // Only update the search query when enter is pressed
+  };
+
+  const handleReset = () => {
+    setInputValue(""); // Clear the input field
+    setSearchQuery(""); // Reset the search query to fetch all products
+  };
 
   if (isLoading) {
     return (
@@ -39,7 +50,14 @@ const ExploreScreen = () => {
     <ThemedView style={styles.container}>
       <Header title="Explore" />
       <ThemedView style={styles.searchBar}>
-        <Search placeholder="Search" onChangeText={() => {}} />
+        <Search
+          placeholder="Search products and press enter"
+          onSearch={handleSearch}
+          value={inputValue}
+          onChangeText={setInputValue}
+          onClear={handleReset}
+          showFilter={true}
+        />
       </ThemedView>
       <FlashList
         data={products}

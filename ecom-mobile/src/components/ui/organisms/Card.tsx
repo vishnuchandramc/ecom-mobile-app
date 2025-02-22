@@ -36,7 +36,7 @@ const Card = ({
   title,
   subtitle,
   imageUrl,
-  onPress = () => {},
+  onPress = () => { },
   style,
   imageStyle,
   chipTitle,
@@ -96,7 +96,9 @@ const Card = ({
               ${subtitle}
             </ThemedText>
           )}
-          {renderATCButton()}
+          <ThemedView style={styles.buttonContainer}>
+            {renderATCButton()}
+          </ThemedView>
         </ThemedView>
       </ThemedView>
     </Pressable>
@@ -138,5 +140,8 @@ const styles = StyleSheet.create({
     left: Space.$2,
     zIndex: 2,
     opacity: 0.6,
+  },
+  buttonContainer: {
+    paddingVertical: Space.$2,
   },
 });

@@ -18,7 +18,15 @@ import { Colors } from "@/constants";
 const Cart = () => {
   const insets = useSafeAreaInsets();
   const colorScheme = useColorScheme();
-  const { items, totalPrice } = useCartStore();
+  const { items, totalPrice, clearCart } = useCartStore();
+
+  const ListEmptyComponent = () => {
+    return (
+      <ThemedView style={styles.emptyContainer}>
+        <ThemedText style={styles.emptyText}>Your cart is empty</ThemedText>
+      </ThemedView>
+    );
+  };
 
   return (
     <SafeAreaView
@@ -38,9 +46,7 @@ const Cart = () => {
           estimatedItemSize={200}
           keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={styles.list}
-          ListEmptyComponent={() => (
-            <ThemedText style={styles.emptyText}>Your cart is empty</ThemedText>
-          )}
+          ListEmptyComponent={ListEmptyComponent}
         />
 
         <ThemedView
@@ -56,11 +62,18 @@ const Cart = () => {
           <ThemedView style={styles.priceContainer}>
             <ThemedText type="default">Total</ThemedText>
             <ThemedText type="title">${totalPrice.toFixed(2)}</ThemedText>
+            <ThemedText
+              type="default"
+              style={{ fontSize: 12, width: "60%", lineHeight: 16 }}
+            >
+              Exclusive of all taxes and shipping charges
+            </ThemedText>
           </ThemedView>
 
           <Button
             variant="primary"
             onPress={() => {
+              clearCart();
               router.replace("/(tabs)/screens");
             }}
             style={styles.checkoutButton}
@@ -106,6 +119,11 @@ const styles = StyleSheet.create({
   },
   checkoutButton: {
     width: 140,
+  },
+  emptyContainer: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   emptyText: {
     textAlign: "center",

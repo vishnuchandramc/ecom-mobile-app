@@ -28,7 +28,7 @@ const index = () => {
 
   if (isLoading) {
     return (
-      <ThemedView style={styles.container}>
+      <ThemedView style={[styles.container, styles.centered]}>
         <ActivityIndicator
           size="large"
           color={Colors[colorScheme ?? "light"].primary}
@@ -170,6 +170,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: Space.$1,
+  },
+  centered: {
+    justifyContent: "center",
+    alignItems: "center",
   },
   title: {
     fontFamily: "AtypTextBold",

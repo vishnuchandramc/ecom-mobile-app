@@ -2,7 +2,6 @@ import React from "react";
 import {
   StyleSheet,
   TextInput,
-  View,
   ViewStyle,
   TextStyle,
   StyleProp,
@@ -14,6 +13,7 @@ import { Colors, Space, BorderRadius } from "@/constants";
 import SearchIcon from "@/assets/icons/SearchIcon";
 import FilterIcon from "@/assets/icons/FilterIcon";
 import { ThemedView } from "../atoms";
+import { ThemedText } from "../atoms/ThemedText";
 
 interface SearchProps {
   onSearch?: (text: string) => void;
@@ -28,6 +28,7 @@ interface SearchProps {
   placeholder?: string;
   isClickable?: boolean;
   onPress?: () => void;
+  onClear?: () => void;
 }
 
 export const Search: React.FC<SearchProps> = ({
@@ -43,6 +44,7 @@ export const Search: React.FC<SearchProps> = ({
   placeholder = "Search",
   isClickable = false,
   onPress,
+  onClear,
 }) => {
   const colorScheme = useColorScheme();
   const colors = Colors[colorScheme ?? "light"];
@@ -71,6 +73,15 @@ export const Search: React.FC<SearchProps> = ({
         editable={!isClickable}
         pointerEvents={isClickable ? "none" : "auto"}
       />
+      {value && onClear && (
+        <TouchableOpacity
+          onPress={onClear}
+          style={styles.clearButton}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <ThemedText style={styles.clearText}>✕</ThemedText>
+        </TouchableOpacity>
+      )}
       {showFilter && (
         <TouchableOpacity
           onPress={isClickable ? undefined : onFilterPress}
@@ -133,5 +144,13 @@ const styles = StyleSheet.create({
   filterButton: {
     marginLeft: Space.$2,
     padding: Space.$1,
+  },
+  clearButton: {
+    marginLeft: Space.$2,
+    padding: Space.$1,
+  },
+  clearText: {
+    fontSize: 16,
+    opacity: 0.6,
   },
 });
