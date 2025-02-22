@@ -1,24 +1,14 @@
-import React, { useCallback } from "react";
-import {
-  StyleSheet,
-  useColorScheme,
-  ActivityIndicator,
-  Text,
-} from "react-native";
+import React from "react";
+import { StyleSheet, ActivityIndicator, Text } from "react-native";
 import { useProductListing } from "@/hooks/listing/useProductListing";
-import { Colors, Space } from "@/constants";
+import { Space } from "@/constants";
 import { ThemedView } from "@/components/ui/atoms";
 import Header from "@/components/ui/molecules/Header";
 import { FlashList } from "@shopify/flash-list";
-import Card from "@/components/ui/organisms/Card";
 import { Search } from "@/components/ui/molecules";
-import useCartStore from "@/store/cart";
-import { Product } from "@/models/ProductModel";
+import ProductItem from "@/components/ui/organisms/Product";
 
 const ExploreScreen = () => {
-  const colorScheme = useColorScheme();
-  const counter = useCartStore((state) => state.totalItems);
-  const cartStore = useCartStore();
   const {
     products,
     isLoading,
@@ -45,15 +35,6 @@ const ExploreScreen = () => {
     );
   }
 
-  const handleCart = (item: Product) => {
-    cartStore.addItem({
-      id: String(item.id),
-      name: item.title,
-      price: item.price,
-      image: item.images[0],
-    });
-  };
-
   return (
     <ThemedView style={styles.container}>
       <Header title="Explore" />
@@ -70,21 +51,7 @@ const ExploreScreen = () => {
         ListFooterComponent={() =>
           isLoadingMore ? <ActivityIndicator style={styles.footer} /> : null
         }
-        renderItem={({ item }) => (
-          <ThemedView style={{ marginVertical: Space.$4, flex: 1 }}>
-            <Card
-              title={item.title}
-              imageUrl={item.images[0]}
-              subtitle={`${item.price}`}
-              imageStyle={{ height: 350 }}
-              onAddToCart={() => handleCart(item)}
-              chipTitle={item.category.name}
-              chipStyle={{
-                backgroundColor: Colors[colorScheme ?? "light"].background,
-              }}
-            />
-          </ThemedView>
-        )}
+        renderItem={({ item }) => <ProductItem item={item} />}
       />
     </ThemedView>
   );

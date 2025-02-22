@@ -15,8 +15,7 @@ interface CartStore {
   totalItems: number;
   addItem: (item: Omit<CartItem, "quantity">) => void;
   removeItem: (itemId: string) => void;
-  updateQuantity: (itemId: string, quantity: number) => void;
-  clearCart: () => void;
+  getItemQuantity: (itemId: string) => number;
 }
 
 const useCartStore = create<CartStore>()(
@@ -47,26 +46,29 @@ const useCartStore = create<CartStore>()(
       removeItem: (itemId) =>
         set((state) => {
           const item = state.items.find((i) => i.id === itemId);
-          return {
-            items: state.items.filter((i) => i.id !== itemId),
-            totalItems: state.totalItems - (item?.quantity || 0),
-          };
-        }),
+          if (!item) return state;
 
-      updateQuantity: (itemId, quantity) =>
-        set((state) => {
-          const oldItem = state.items.find((i) => i.id === itemId);
-          const quantityDiff = quantity - (oldItem?.quantity || 0);
+          if (item.quantity === 1) {
+            return {
+              items: state.items.filter((i) => i.id !== itemId),
+              totalItems: state.totalItems - 1,
+            };
+          }
 
           return {
-            items: state.items.map((item) =>
-              item.id === itemId ? { ...item, quantity } : item
+            items: state.items.map((i) =>
+              i.id === itemId ? { ...i, quantity: i.quantity - 1 } : i
             ),
-            totalItems: state.totalItems + quantityDiff,
+            totalItems: state.totalItems - 1,
           };
         }),
 
       clearCart: () => set({ items: [], totalItems: 0 }),
+
+      getItemQuantity: (itemId) => {
+        const item = get().items.find((i) => i.id === itemId);
+        return item?.quantity || 0;
+      },
     }),
     {
       name: "cart-storage",

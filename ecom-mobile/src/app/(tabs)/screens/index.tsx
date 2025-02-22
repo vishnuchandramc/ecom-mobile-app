@@ -130,9 +130,11 @@ const index = () => {
         renderItem={({ item, index }) => (
           <ThemedView style={{ margin: Space.$0, flex: 1 }}>
             <Card
+              id={item.id.toString()}
               title={item.name}
               imageUrl={item.image}
               style={{ borderWidth: 1 }}
+              showATCButton={false}
               onPress={() => {
                 router.navigate(`/(other)/CategoryList?categoryId=${item.id}`);
               }}

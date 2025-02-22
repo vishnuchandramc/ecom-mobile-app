@@ -10,10 +10,10 @@ import { Colors, Space } from "@/constants";
 import { ThemedView } from "@/components/ui/atoms";
 import Header from "@/components/ui/molecules/Header";
 import { FlashList } from "@shopify/flash-list";
-import Card from "@/components/ui/organisms/Card";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
+import ProductItem from "@/components/ui/organisms/Product";
 
 const CategoryList = () => {
   const colorScheme = useColorScheme();
@@ -80,27 +80,7 @@ const CategoryList = () => {
           ListFooterComponent={() =>
             isLoadingMore ? <ActivityIndicator style={styles.footer} /> : null
           }
-          renderItem={({ item }) => (
-            <ThemedView style={{ marginVertical: Space.$4, flex: 1 }}>
-              <Card
-                title={item.title}
-                imageUrl={item.images[0]}
-                subtitle={`${item.price}`}
-                imageStyle={{ height: 350 }}
-                onPress={() =>
-                  router.push({
-                    pathname: "/(other)/Details",
-                    params: { id: item.id, title: item.title },
-                  })
-                }
-                onAddToCart={() => {}}
-                chipTitle={item.category.name}
-                chipStyle={{
-                  backgroundColor: Colors[colorScheme ?? "light"].background,
-                }}
-              />
-            </ThemedView>
-          )}
+          renderItem={({ item }) => <ProductItem item={item} />}
         />
       </ThemedView>
     </SafeAreaView>

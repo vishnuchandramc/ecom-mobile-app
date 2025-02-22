@@ -6,39 +6,66 @@ import {
   useColorScheme,
   ViewStyle,
 } from "react-native";
-import React from "react";
+import React, { memo } from "react";
 import { BorderRadius, Space } from "../../../constants/Space";
 import { ThemedText } from "../atoms/ThemedText";
-import { Button } from "../molecules";
+import { Button, CounterButton } from "../molecules";
 import { Colors } from "@/constants";
 import Image from "../molecules/Image";
 import { ThemedView } from "../atoms";
 import { Chip } from "../molecules/Chip";
+import useCartStore from "@/store/cart";
 
 interface CardProps {
+  id: string;
   title: string;
   subtitle?: string;
   imageUrl: string;
-  onAddToCart?: () => void;
   onPress?: () => void;
   style?: StyleProp<ViewStyle>;
   imageStyle?: StyleProp<ImageStyle>;
   chipTitle?: string;
   chipStyle?: ViewStyle;
+  onDecrement?: () => void;
+  onIncrement?: () => void;
+  showATCButton?: boolean;
 }
 
 const Card = ({
+  id,
   title,
   subtitle,
   imageUrl,
-  onAddToCart,
   onPress = () => {},
   style,
   imageStyle,
   chipTitle,
   chipStyle,
+  onDecrement,
+  onIncrement,
+  showATCButton = true,
 }: CardProps) => {
   const colorScheme = useColorScheme();
+  const itemQuantity = useCartStore((state) => state.getItemQuantity(id));
+
+  const renderATCButton = () => {
+    if (!showATCButton) return null;
+    if (itemQuantity > 0) {
+      return (
+        <CounterButton
+          value={itemQuantity}
+          onIncrement={() => onIncrement?.()}
+          onDecrement={() => onDecrement?.()}
+        />
+      );
+    }
+    return (
+      <Button style={styles.button} variant="primary" onPress={onIncrement}>
+        Add to cart
+      </Button>
+    );
+  };
+
   return (
     <TouchableOpacity onPress={onPress}>
       <ThemedView
@@ -69,22 +96,14 @@ const Card = ({
               ${subtitle}
             </ThemedText>
           )}
-          {onAddToCart && (
-            <Button
-              style={styles.button}
-              variant="primary"
-              onPress={onAddToCart}
-            >
-              Add to cart
-            </Button>
-          )}
+          {renderATCButton()}
         </ThemedView>
       </ThemedView>
     </TouchableOpacity>
   );
 };
 
-export default Card;
+export default memo(Card);
 
 const styles = StyleSheet.create({
   container: {
@@ -111,7 +130,7 @@ const styles = StyleSheet.create({
   button: {
     width: "100%",
     minHeight: Space.$6,
-    paddingVertical: Space.$2,
+    paddingVertical: Space.$3,
   },
   chip: {
     position: "absolute",

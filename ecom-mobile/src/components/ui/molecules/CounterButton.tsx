@@ -18,8 +18,6 @@ interface CounterButtonProps {
   disabled?: boolean;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  min?: number;
-  max?: number;
 }
 
 export const CounterButton: React.FC<CounterButtonProps> = ({
@@ -29,8 +27,6 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
   disabled = false,
   style,
   textStyle,
-  min = 0,
-  max = 99,
 }) => {
   const colorScheme = useColorScheme();
 
@@ -45,8 +41,8 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
     >
       <TouchableOpacity
         onPress={onDecrement}
-        disabled={disabled || value <= min}
-        style={[styles.button, { opacity: value <= min ? 0.5 : 1 }]}
+        disabled={disabled || value <= 0}
+        style={[styles.button, { opacity: value <= 0 ? 0.5 : 1 }]}
       >
         <ThemedText
           style={[
@@ -72,8 +68,8 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
 
       <TouchableOpacity
         onPress={onIncrement}
-        disabled={disabled || value >= max}
-        style={[styles.button, { opacity: value >= max ? 0.5 : 1 }]}
+        disabled={disabled}
+        style={[styles.button, { opacity: disabled ? 0.5 : 1 }]}
       >
         <ThemedText
           style={[
