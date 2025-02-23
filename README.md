@@ -38,7 +38,6 @@ APK link:
 
 - **Expo**: A framework for building native apps using React.
 - **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
-- **React Navigation**: Routing and navigation for Expo and React Native apps.
 - **Expo Router**: A file-based router for Expo apps.
 - **AsyncStorage**: An unencrypted, asynchronous, persistent, key-value storage system for React Native.
 - **React Native Reanimated**: A library for creating complex animations in React Native.
