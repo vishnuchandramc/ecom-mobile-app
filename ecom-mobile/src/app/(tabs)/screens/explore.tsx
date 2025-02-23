@@ -8,10 +8,13 @@ import { FlashList } from '@shopify/flash-list'
 import { Search } from '@/components/ui/molecules'
 import ProductItem from '@/components/ui/organisms/Product'
 import EmptyListIndicator from '@/components/ui/organisms/EmptyListIndicator'
+import { router } from 'expo-router'
+import { useFilterStore } from '@/store/filterStore'
 
 const ExploreScreen = () => {
   const [inputValue, setInputValue] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
+  const { resetFilters, price_min, price_max, categoryId } = useFilterStore()
   const {
     products,
     isLoading,
@@ -29,6 +32,7 @@ const ExploreScreen = () => {
   const handleReset = () => {
     setInputValue('')
     setSearchQuery('')
+    resetFilters()
   }
 
   if (isLoading) {
@@ -40,18 +44,28 @@ const ExploreScreen = () => {
   }
 
   const ListEmptyComponent = () => {
-    if (searchQuery && products.length === 0) {
+    if (
+      searchQuery &&
+      (price_min > 0 || price_max > 0 || categoryId !== null) &&
+      products.length === 0
+    ) {
       return (
         <EmptyListIndicator
           title='No products found'
-          description='Please try with different keyword'
+          description='Please try with different keyword or adjust filters'
           showHeader={false}
         />
       )
     }
   }
 
-  if (!searchQuery && (error || products.length === 0)) {
+  if (
+    !searchQuery &&
+    !price_min &&
+    !price_max &&
+    !categoryId &&
+    (error || products.length === 0)
+  ) {
     return (
       <EmptyListIndicator
         title='Something went wrong'
@@ -71,6 +85,7 @@ const ExploreScreen = () => {
           onChangeText={setInputValue}
           onClear={handleReset}
           showFilter={true}
+          onFilterPress={() => router.push('/filter')}
         />
       </ThemedView>
       <FlashList

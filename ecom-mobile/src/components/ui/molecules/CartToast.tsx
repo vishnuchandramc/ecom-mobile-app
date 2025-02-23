@@ -26,7 +26,8 @@ export const CartToast: React.FC = () => {
     pathname === '/' ||
     pathname === '/screens/Login' ||
     pathname === '/screens/Signup' ||
-    pathname === '/screens/profile'
+    pathname === '/screens/profile' ||
+    pathname === '/filter'
   )
     return null
 
