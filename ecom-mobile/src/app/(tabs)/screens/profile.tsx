@@ -12,6 +12,7 @@ const width = Dimensions.get('window').width
 export default function Profile () {
   const colorScheme = useColorScheme()
   const clearAuth = useAuthStore(state => state.clearAuth)
+  const userData = useAuthStore(state => state.userData)
 
   const handleLogout = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
@@ -48,7 +49,7 @@ export default function Profile () {
       <ThemedView style={styles.profileContainer}>
         <Image
           source={{
-            uri: 'https://ui-avatars.com/api/?background=1B1B1B&color=fff&name=vi'
+            uri: `https://ui-avatars.com/api/?background=1B1B1B&color=fff&name=${userData?.name}`
           }}
           style={[
             styles.profileImageContainer,
@@ -56,9 +57,9 @@ export default function Profile () {
           ]}
         />
         <ThemedText type='hero' style={styles.title}>
-          John Doe
+          {userData?.name}
         </ThemedText>
-        <ThemedText type='default'>vcmpd@gmail.com</ThemedText>
+        <ThemedText type='default'>{userData?.email}</ThemedText>
       </ThemedView>
       <Button
         variant='primary'
@@ -81,9 +82,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
     marginTop: Space.$4,
     fontFamily: 'AtypTextBold',
-    paddingVertical: Space.$4,
-    letterSpacing: 1,
-    textTransform: 'uppercase'
+    paddingVertical: Space.$4
   },
   profileImageContainer: {
     width: 100,

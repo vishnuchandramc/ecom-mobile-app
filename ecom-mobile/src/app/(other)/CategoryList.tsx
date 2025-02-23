@@ -35,7 +35,7 @@ const CategoryList = () => {
     )
   }
 
-  if (error || !products) {
+  if (error || !products || products.length === 0) {
     return (
       <EmptyListIndicator
         title='No products found'
