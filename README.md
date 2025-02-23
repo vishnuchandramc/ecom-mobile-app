@@ -3,6 +3,8 @@
 BLUME is a cross-platform ecommerce application using React Native.
 
 APK Link: https://expo.dev/artifacts/eas/kB5n5VV9uW5BuRzFq4QaAT.apk
+
+
 Design (figma) : https://www.figma.com/design/vsllpYgskBZgDTf4aZ7Kw1/BLUME---Ecommerce-app?node-id=0-1&t=l5USqife51UeaEQe-1
 
 [App flow starting from auth screen to Checkout]
