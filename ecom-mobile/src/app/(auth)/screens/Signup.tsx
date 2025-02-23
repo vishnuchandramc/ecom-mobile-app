@@ -7,6 +7,7 @@ import { Colors, Space } from '@/constants'
 import { Ionicons } from '@expo/vector-icons'
 import { useSignUp } from '@/hooks/auth/useSignUp'
 import Wrapper from '@/components/ui/molecules/Wrapper'
+import CustomActivityIndicator from '@/components/ui/organisms/ActivityIndicator'
 
 const Signup = () => {
   const colorScheme = useColorScheme()
@@ -87,7 +88,7 @@ const Signup = () => {
             loading || Object.values(formErrors).some(error => error !== null)
           }
         >
-          {loading ? 'Loading...' : 'Sign Up'}
+          {loading ? <CustomActivityIndicator size='small' /> : 'Sign Up'}
         </Button>
       </Animated.View>
 
@@ -101,7 +102,7 @@ const Signup = () => {
           type='default'
           style={[{ color: Colors[colorScheme ?? 'light'].primary }]}
         >
-          Already have an account?{' '}
+          Already have an account?
         </ThemedText>
         <Link href='/(auth)/screens/Login' asChild>
           <Button variant='tertiary' style={styles.link}>

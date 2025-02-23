@@ -9,6 +9,7 @@ import {
   validateConfirmPassword,
 } from "@/utils/Utils";
 import { FormErrors, SignUpForm } from "@/models/AuthModels";
+import { Alert } from "react-native";
 
 export const useSignUp = () => {
   const [form, setForm] = useState<SignUpForm>({
@@ -88,7 +89,16 @@ export const useSignUp = () => {
       });
 
       if (response.id) {
-        router.replace("/(auth)/screens/Login");
+        Alert.alert(
+          "Success",
+          "Account created successfully! Please login to continue.",
+          [
+            {
+              text: "OK",
+              onPress: () => router.replace("/(auth)/screens/Login"),
+            },
+          ]
+        );
       } else {
         setError("Invalid response from server");
       }
