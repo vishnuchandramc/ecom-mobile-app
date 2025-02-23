@@ -24,49 +24,6 @@
 - Zustand (State Management)
 - And more...
 
-## 🛠️ Prerequisites
-
-Before running this project, make sure you have the following installed:
-
-- Node.js (LTS version)
-- Yarn or npm
-- Expo CLI
-- iOS Simulator (for Mac users) or Android Studio (for Android development)
-
-## 🚀 Getting Started
-
-1. Clone the repository:
-```bash
-git clone [your-repository-url]
-cd ecom-mobile
-```
-
-2. Install dependencies:
-```bash
-yarn install
-# or
-npm install
-```
-
-3. Start the development server:
-```bash
-yarn start
-# or
-npm start
-```
-
-4. Run on specific platforms:
-```bash
-# For iOS
-yarn ios
-# or
-npm run ios
-
-# For Android
-yarn android
-# or
-npm run android
-
 
 ## 📂 Project Structure
 
@@ -83,19 +40,10 @@ ecom-mobile/
 └── package.json       # Project dependencies and scripts
 ```
 
-## 🔍 Linting
 
-Run linting checks:
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-## 📱 Building for Production
-
-This project uses EAS Build for creating production builds. Configure your build settings in `eas.json`.
 
 ## 👥 Authors
 
 - Vishnu Chandra MC
+
+[Note: The images and placeholder text are for demonstration purposes only and should be ignored]
