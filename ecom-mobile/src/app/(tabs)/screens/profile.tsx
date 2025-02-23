@@ -42,7 +42,7 @@ export default function Profile () {
     >
       <Image
         source={{
-          uri: 'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image8.jpg?raw=true'
+          uri: 'https://github.com/vishnuchandramc/ecom-mobile-app/blob/bug_fixes/ecom-mobile/src/assets/images/image9.jpg?raw=true'
         }}
         style={[styles.headerImage]}
       />
