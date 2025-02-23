@@ -5,14 +5,12 @@ A modern, feature-rich e-commerce mobile application built with React Native and
 ## 🚀 Features
 
 - Modern and intuitive user interface
-- Responsive design for both iOS and Android
+- Responsive design for both iOS and Android (portrait locked)
 - Smooth animations and transitions using React Native Reanimated
 - Secure data storage with AsyncStorage
 - Efficient list rendering with Shopify FlashList
 - Haptic feedback for enhanced user experience
 - Bottom tab navigation
-- Blur effects and linear gradients for modern UI elements
-- WebView support for external content
 - State management using Zustand
 - TypeScript for type safety
 
