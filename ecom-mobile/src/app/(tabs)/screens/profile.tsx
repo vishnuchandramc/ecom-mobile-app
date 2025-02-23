@@ -1,13 +1,13 @@
-import { Alert, StyleSheet } from 'react-native'
+import { Alert, Dimensions, StyleSheet } from 'react-native'
 import { ThemedText, ThemedView } from '@/components/ui/atoms'
 import { useColorScheme } from 'react-native'
 import { Colors, Space } from '@/constants'
 import { Button } from '@/components/ui/molecules'
 import { useAuthStore } from '@/store/auth'
 import { router } from 'expo-router'
-import Header from '@/components/ui/molecules/Header'
 import Image from '@/components/ui/molecules/Image'
-import ParallaxScrollView from '@/components/ui/organisms/ParallaxScrollView'
+
+const width = Dimensions.get('window').width
 
 export default function Profile () {
   const colorScheme = useColorScheme()
@@ -39,33 +39,27 @@ export default function Profile () {
         }
       ]}
     >
-      <Header title='Profile' />
-      <ParallaxScrollView
-        headerBackgroundColor={{
-          dark: Colors.dark.background,
-          light: Colors.light.background
+      <Image
+        source={{
+          uri: 'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image8.jpg?raw=true'
         }}
-        headerImage={
-          <Image
-            source={{
-              uri: 'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image6.jpg?raw=true'
-            }}
-          />
-        }
-      >
-        <ThemedView style={styles.profileContainer}>
-          <Image
-            source={{
-              uri: 'https://ui-avatars.com/api/?background=1B1B1B&color=fff&name=vi'
-            }}
-            style={[styles.profileImageContainer]}
-          />
-          <ThemedText type='hero' style={styles.title}>
-            John Doe
-          </ThemedText>
-          <ThemedText type='default'>vcmpd@gmail.com</ThemedText>
-        </ThemedView>
-      </ParallaxScrollView>
+        style={[styles.headerImage]}
+      />
+      <ThemedView style={styles.profileContainer}>
+        <Image
+          source={{
+            uri: 'https://ui-avatars.com/api/?background=1B1B1B&color=fff&name=vi'
+          }}
+          style={[
+            styles.profileImageContainer,
+            { borderColor: Colors[colorScheme ?? 'light'].background }
+          ]}
+        />
+        <ThemedText type='hero' style={styles.title}>
+          John Doe
+        </ThemedText>
+        <ThemedText type='default'>vcmpd@gmail.com</ThemedText>
+      </ThemedView>
       <Button
         variant='primary'
         style={styles.logoutButton}
@@ -94,10 +88,18 @@ const styles = StyleSheet.create({
   profileImageContainer: {
     width: 100,
     height: 100,
-    borderRadius: 50
+    borderRadius: 50,
+    position: 'absolute',
+    top: -50,
+    borderWidth: 4,
+    alignSelf: 'center'
   },
   logoutButton: {
     margin: Space.$4
+  },
+  headerImage: {
+    width: '100%',
+    height: width
   },
   profileContainer: {
     alignItems: 'center',
