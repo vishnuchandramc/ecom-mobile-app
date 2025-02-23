@@ -26,7 +26,4 @@ BLUME is built using Expo, which simplifies the development process and allows f
 - **React Native Reanimated**: A library for creating complex animations in React Native.
 - **Zustand**: A small, fast, and scalable state management solution.
 
-## Getting Started
-
-To get started with BLUME, clone the repository and install the dependencies:
 
