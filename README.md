@@ -1,6 +1,6 @@
 # BLUME - Ecommerce App
 
-BLUME is a cross-platform ecommerce application designed to provide a seamless shopping experience with support for both dark and light modes. Built using modern technologies, BLUME is available on both Android and iOS platforms.
+BLUME is a cross-platform ecommerce application using react native.
 
 ## Features
 
