@@ -105,9 +105,3 @@ This project uses EAS Build for creating production builds. Configure your build
 ## 👥 Authors
 
 - Vishnu Chandra MC
-
-## 🙏 Acknowledgments
-
-- Expo team for the amazing framework
-- React Native community
-- All contributors who helped with the project
