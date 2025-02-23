@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ecom-mobile",
+    "name": "BLUME.",
     "slug": "ecom-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "foregroundImage": "./src/assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
