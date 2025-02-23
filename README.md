@@ -34,7 +34,9 @@ For a video demonstration, please [click here](https://github.com/user-attachmen
 BLUME is built using Expo, which simplifies the development process and allows for easy deployment across multiple platforms.
 
 APK link:
-API: https://fakeapi.platzi.com/
+
+
+Mock API: https://fakeapi.platzi.com/
 
 ## Technologies Used
 
