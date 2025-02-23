@@ -7,6 +7,10 @@ BLUME is a cross-platform ecommerce application using React Native.
    <img src="https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b" alt="WhatsApp Image Feb 24 2025 (1)" width="200"/>
   <img src="https://github.com/user-attachments/assets/e10e347d-5cc7-4110-a0ba-6c22ea481d1b" alt="WhatsApp Image Feb 24 2025 (2)" width="200"/>
  
+
+  https://github.com/user-attachments/assets/a3d4e993-d872-4415-8886-b56955448915
+
+
 </div>
 
 ## Features
