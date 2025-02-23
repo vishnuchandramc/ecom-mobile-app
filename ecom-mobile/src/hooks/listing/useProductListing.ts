@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Endpoints } from "@/constants/Endpoints";
 import { fetchWrapper } from "@/services/fetchWrapper";
 import { Product } from "@/models/ProductModel";
+import { useFilterStore } from "@/store/filterStore";
 
 const LIMIT = 10;
 
@@ -11,6 +12,7 @@ interface ProductListingParams {
 }
 
 export const useProductListing = (params?: ProductListingParams) => {
+  const { price_min, price_max, categoryId } = useFilterStore();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -22,13 +24,15 @@ export const useProductListing = (params?: ProductListingParams) => {
   const fetchProducts = useCallback(
     async (currentOffset: number, append = false) => {
       try {
-        const categoryFilter = params?.categoryId
-          ? `&categoryId=${params.categoryId}`
-          : "";
+        const categoryFilter =
+          params?.categoryId || categoryId
+            ? `&categoryId=${params?.categoryId || categoryId}`
+            : "";
         const keywordFilter = params?.keyword ? `&title=${params.keyword}` : "";
+        const priceFilter = `&price_min=${price_min}&price_max=${price_max}`;
 
         const response = await fetchWrapper.get(
-          `${Endpoints.PRODUCTS}?offset=${currentOffset}&limit=${LIMIT}${categoryFilter}${keywordFilter}`
+          `${Endpoints.PRODUCTS}?offset=${currentOffset}&limit=${LIMIT}${categoryFilter}${keywordFilter}${priceFilter}`
         );
 
         if (response.length < LIMIT) {
@@ -46,15 +50,15 @@ export const useProductListing = (params?: ProductListingParams) => {
         }
       }
     },
-    [params?.categoryId, params?.keyword]
+    [params?.categoryId, params?.keyword, price_min, price_max, categoryId]
   );
 
   useEffect(() => {
     setIsLoading(true);
-    // Call fetchProducts with initial offset of 0 to load first page
-    // When the fetch completes (whether successful or failed), set loading to false
+    setOffset(0);
+    setHasMore(true);
     fetchProducts(0).finally(() => setIsLoading(false));
-  }, [params?.categoryId, params?.keyword]);
+  }, [params?.categoryId, params?.keyword, price_min, price_max, categoryId]);
 
   const loadMore = async () => {
     if (isLoadingMore || !hasMore) return;

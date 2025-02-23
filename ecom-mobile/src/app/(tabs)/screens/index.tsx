@@ -106,7 +106,7 @@ const index = () => {
           </ThemedView>
         </Carousel>
         <TitleContainer
-          title='Shop by category'
+          title='Shop by categories'
           subtitle='Explore our wide range of categories'
         />
       </ThemedView>

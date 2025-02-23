@@ -5,6 +5,8 @@ import { useAuthStore } from "@/store/auth";
 import { debounce } from "lodash";
 import { FormErrors, LoginForm } from "@/models/AuthModels";
 import { validateEmail, validatePassword } from "@/utils/Utils";
+import { fetchWrapper } from "@/services/fetchWrapper";
+import { Endpoints } from "@/constants/Endpoints";
 
 export const useLogin = () => {
   const [form, setForm] = useState<LoginForm>({
@@ -17,7 +19,7 @@ export const useLogin = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const setAuth = useAuthStore((state) => state.setAuth);
+  const { setAuth, setUserData } = useAuthStore((state) => state);
 
   const updateFormErrors = useCallback(
     (name: keyof LoginForm, value: string) => {
@@ -65,8 +67,15 @@ export const useLogin = () => {
         email: form.email,
         password: form.password,
       });
+      console.log("access token", response.access_token);
 
       if (response.access_token) {
+        const userData = await fetchWrapper.get(Endpoints.AUTH.PROFILE, {
+          headers: {
+            Authorization: `Bearer ${response.access_token}`,
+          },
+        });
+        setUserData(userData);
         setAuth(response);
         router.replace("/(tabs)/screens");
       } else {

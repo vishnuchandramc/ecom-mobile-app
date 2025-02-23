@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import { useRouter, usePathname } from 'expo-router'
 import useCartStore from '@/store/cart'
-import { ThemedText } from '../atoms'
+import { ThemedText, ThemedView } from '../atoms'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { BorderRadius, Colors, Space } from '@/constants'
 
@@ -26,7 +26,8 @@ export const CartToast: React.FC = () => {
     pathname === '/' ||
     pathname === '/screens/Login' ||
     pathname === '/screens/Signup' ||
-    pathname === '/screens/profile'
+    pathname === '/screens/profile' ||
+    pathname === '/filter'
   )
     return null
 
@@ -52,7 +53,7 @@ export const CartToast: React.FC = () => {
       onPress={handlePress}
       activeOpacity={0.8}
     >
-      <View style={styles.content}>
+      <ThemedView style={styles.content}>
         <ThemedText
           style={[
             styles.text,
@@ -69,7 +70,7 @@ export const CartToast: React.FC = () => {
         >
           View Cart
         </ThemedText>
-      </View>
+      </ThemedView>
     </TouchableOpacity>
   )
 }

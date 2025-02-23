@@ -3,18 +3,19 @@ import {
   TextInput,
   TextInputProps,
   Text,
-  useColorScheme,
-} from "react-native";
-import React from "react";
-import { BorderRadius, Colors } from "@/constants";
-import { ThemedView } from "./ThemedView";
+  useColorScheme
+} from 'react-native'
+import React from 'react'
+import { BorderRadius, Colors } from '@/constants'
+import { ThemedView } from './ThemedView'
+import { ThemedText } from './ThemedText'
 
 interface ThemedInputProps extends TextInputProps {
-  error?: string;
+  error?: string
 }
 
 const ThemedInput = ({ error, ...props }: ThemedInputProps) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
     <ThemedView style={styles.container}>
@@ -22,48 +23,48 @@ const ThemedInput = ({ error, ...props }: ThemedInputProps) => {
         style={[
           styles.input,
           {
-            backgroundColor: Colors[colorScheme ?? "light"].border,
-            color: Colors[colorScheme ?? "light"].primary,
-            fontFamily: "AtypText",
+            backgroundColor: Colors[colorScheme ?? 'light'].border,
+            color: Colors[colorScheme ?? 'light'].primary,
+            fontFamily: 'AtypText',
             borderColor: error
-              ? Colors[colorScheme ?? "light"].error
-              : Colors[colorScheme ?? "light"].border,
-          },
+              ? Colors[colorScheme ?? 'light'].error
+              : Colors[colorScheme ?? 'light'].border
+          }
         ]}
-        placeholderTextColor={Colors[colorScheme ?? "light"].primary}
+        placeholderTextColor={Colors[colorScheme ?? 'light'].primary}
         {...props}
       />
       {error && (
-        <Text
+        <ThemedText
           style={[
             styles.errorText,
-            { color: Colors[colorScheme ?? "light"].error },
+            { color: Colors[colorScheme ?? 'light'].error }
           ]}
         >
           {error}
-        </Text>
+        </ThemedText>
       )}
     </ThemedView>
-  );
-};
+  )
+}
 
-export { ThemedInput };
+export { ThemedInput }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    marginVertical: 8,
+    width: '100%',
+    marginVertical: 8
   },
   input: {
     height: 62,
     borderWidth: 1,
     borderRadius: BorderRadius.standard,
     paddingHorizontal: 16,
-    fontSize: 16,
+    fontSize: 16
   },
   errorText: {
     fontSize: 12,
     marginTop: 4,
-    marginLeft: 4,
-  },
-});
+    marginLeft: 4
+  }
+})

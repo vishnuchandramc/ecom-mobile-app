@@ -2,12 +2,11 @@ import {
   Platform,
   StyleSheet,
   useColorScheme,
-  useWindowDimensions,
-  View
+  useWindowDimensions
 } from 'react-native'
 import { router } from 'expo-router'
 import { Marquee } from '@/components/ui/organisms/Marquee'
-import { Colors, Space } from '@/constants'
+import { Space } from '@/constants'
 import Header from '@/components/ui/molecules/Header'
 import { ThemedText, ThemedView } from '@/components/ui/atoms'
 import { Button } from '@/components/ui/molecules'
@@ -29,7 +28,7 @@ const Auth = () => {
     <Wrapper style={styles.wrapper}>
       <ThemedView style={styles.container}>
         <Header title='BLUME.' titleStyle={styles.title} />
-        <View style={styles.contentContainer}>
+        <ThemedView style={styles.contentContainer}>
           <Marquee
             images={[
               'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image1.jpg?raw=true',
@@ -66,9 +65,9 @@ const Auth = () => {
             Upgrade your look with new arrivals. Grab your favourite pieces and
             create your own style.
           </ThemedText>
-        </View>
+        </ThemedView>
 
-        <View style={styles.buttonContainer}>
+        <ThemedView style={styles.buttonContainer}>
           <Button variant='primary' onPress={handleSignUp}>
             Sign up with email
           </Button>
@@ -79,7 +78,7 @@ const Auth = () => {
           >
             Login with email
           </Button>
-        </View>
+        </ThemedView>
       </ThemedView>
     </Wrapper>
   )

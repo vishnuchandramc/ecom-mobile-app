@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/molecules'
 import { Colors, Space } from '@/constants'
 import { useLogin } from '@/hooks/auth/useLogin'
 import Wrapper from '@/components/ui/molecules/Wrapper'
+import CustomActivityIndicator from '@/components/ui/organisms/ActivityIndicator'
 
 const Login = () => {
   const colorScheme = useColorScheme()
@@ -71,7 +72,7 @@ const Login = () => {
           loading || Object.values(formErrors).some(error => error !== null)
         }
       >
-        {loading ? 'Loading...' : 'Login'}
+        {loading ? <CustomActivityIndicator size='small' /> : 'Login'}
       </Button>
 
       <ThemedView
@@ -84,7 +85,7 @@ const Login = () => {
           type='default'
           style={[{ color: Colors[colorScheme ?? 'light'].primary }]}
         >
-          Don't have an account?{' '}
+          Don't have an account?
         </ThemedText>
         <Button
           variant='tertiary'
