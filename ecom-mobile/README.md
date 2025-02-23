@@ -73,11 +73,6 @@ yarn android
 # or
 npm run android
 
-# For web
-yarn web
-# or
-npm run web
-```
 
 ## 📂 Project Structure
 
@@ -94,15 +89,6 @@ ecom-mobile/
 └── package.json       # Project dependencies and scripts
 ```
 
-## 🧪 Testing
-
-Run tests using Jest:
-```bash
-yarn test
-# or
-npm test
-```
-
 ## 🔍 Linting
 
 Run linting checks:
@@ -116,21 +102,9 @@ npm run lint
 
 This project uses EAS Build for creating production builds. Configure your build settings in `eas.json`.
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 👥 Authors
 
-- Your Name - Initial work
+- Vishnu Chandra MC
 
 ## 🙏 Acknowledgments
 
