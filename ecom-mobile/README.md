@@ -42,7 +42,7 @@ ecom-mobile/
 
 
 
-## 👥 Authors
+## 👥 Author
 
 - Vishnu Chandra MC
 
