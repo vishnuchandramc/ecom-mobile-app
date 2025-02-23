@@ -1,7 +1,3 @@
-# E-Commerce Mobile App
-
-A modern, feature-rich e-commerce mobile application built with React Native and Expo. This application provides a seamless shopping experience with a beautiful user interface and robust functionality.
-
 ## 🚀 Features
 
 - Modern and intuitive user interface
