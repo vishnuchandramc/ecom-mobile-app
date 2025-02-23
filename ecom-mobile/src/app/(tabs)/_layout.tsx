@@ -3,7 +3,6 @@ import React from 'react'
 import { ThemedView } from '@/components/ui/atoms'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { HapticTab } from '@/components/ui/atoms/Haptic'
-import TabBarBackground from '@/components/ui/organisms/TabBarBackground'
 import { Colors, Space } from '@/constants'
 import { useColorScheme } from 'react-native'
 import HomeIcon from '@/assets/icons/HomeIcon'
@@ -40,7 +39,6 @@ export default function TabLayout () {
               fontFamily: 'AtypTextMedium',
               paddingVertical: Space.$2
             },
-            tabBarBackground: TabBarBackground,
             tabBarStyle: {
               backgroundColor: Colors[colorScheme ?? 'light'].background,
               borderTopWidth: 1,

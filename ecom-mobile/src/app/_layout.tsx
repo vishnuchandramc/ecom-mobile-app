@@ -14,6 +14,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { useColorScheme } from '@/hooks/useColorScheme'
 import { useAuthStore } from '@/store/auth'
 import { CartToast } from '@/components/ui/molecules/CartToast'
+import { ThemedView } from '@/components/ui/atoms'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -40,7 +41,7 @@ export default function RootLayout () {
   return (
     <SafeAreaProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <View style={{ flex: 1 }}>
+        <ThemedView style={{ flex: 1 }}>
           <Stack>
             <Stack.Screen
               name='(auth)'
@@ -68,7 +69,7 @@ export default function RootLayout () {
           </Stack>
           <StatusBar style='auto' />
           <CartToast />
-        </View>
+        </ThemedView>
       </ThemeProvider>
     </SafeAreaProvider>
   )

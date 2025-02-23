@@ -59,7 +59,13 @@ export default function Profile () {
         <ThemedText type='hero' style={styles.title}>
           {userData?.name}
         </ThemedText>
-        <ThemedText type='default'>{userData?.email}</ThemedText>
+        <ThemedText type='default' style={{ paddingTop: Space.$2 }}>
+          {userData?.email}
+        </ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.versionContainer}>
+        <ThemedText type='default'>App version: </ThemedText>
+        <ThemedText type='default'>1.0.0</ThemedText>
       </ThemedView>
       <Button
         variant='primary'
@@ -81,8 +87,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 38,
     marginTop: Space.$4,
-    fontFamily: 'AtypTextBold',
-    paddingVertical: Space.$4
+    fontFamily: 'AtypTextBold'
   },
   profileImageContainer: {
     width: 100,
@@ -104,5 +109,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1
+  },
+  versionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

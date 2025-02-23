@@ -1,23 +1,24 @@
-import React from "react";
+import React from 'react'
 import {
   StyleSheet,
   TouchableOpacity,
   ViewStyle,
   TextStyle,
   StyleProp,
-  View,
-} from "react-native";
-import { ThemedText } from "../atoms/ThemedText";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { Colors, Space, BorderRadius, fontSize } from "@/constants";
+  View
+} from 'react-native'
+import { ThemedText } from '../atoms/ThemedText'
+import { useColorScheme } from '@/hooks/useColorScheme'
+import { Colors, Space, BorderRadius, fontSize } from '@/constants'
+import { ThemedView } from '../atoms'
 
 interface CounterButtonProps {
-  value: number;
-  onIncrement: () => void;
-  onDecrement: () => void;
-  disabled?: boolean;
-  style?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<TextStyle>;
+  value: number
+  onIncrement: () => void
+  onDecrement: () => void
+  disabled?: boolean
+  style?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
 }
 
 export const CounterButton: React.FC<CounterButtonProps> = ({
@@ -26,17 +27,17 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
   onDecrement,
   disabled = false,
   style,
-  textStyle,
+  textStyle
 }) => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
 
   return (
-    <View
+    <ThemedView
       style={[
         styles.container,
-        { backgroundColor: Colors[colorScheme ?? "light"].primary },
+        { backgroundColor: Colors[colorScheme ?? 'light'].primary },
         disabled && styles.disabled,
-        style,
+        style
       ]}
     >
       <TouchableOpacity
@@ -47,24 +48,24 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
         <ThemedText
           style={[
             styles.buttonText,
-            { color: Colors[colorScheme ?? "light"].background },
+            { color: Colors[colorScheme ?? 'light'].background }
           ]}
         >
           -
         </ThemedText>
       </TouchableOpacity>
 
-      <View style={styles.valueContainer}>
+      <ThemedView style={styles.valueContainer}>
         <ThemedText
           style={[
             styles.value,
-            { color: Colors[colorScheme ?? "light"].background },
-            textStyle,
+            { color: Colors[colorScheme ?? 'light'].background },
+            textStyle
           ]}
         >
           {value}
         </ThemedText>
-      </View>
+      </ThemedView>
 
       <TouchableOpacity
         onPress={onIncrement}
@@ -74,48 +75,48 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
         <ThemedText
           style={[
             styles.buttonText,
-            { color: Colors[colorScheme ?? "light"].background },
+            { color: Colors[colorScheme ?? 'light'].background }
           ]}
         >
           +
         </ThemedText>
       </TouchableOpacity>
-    </View>
-  );
-};
+    </ThemedView>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: BorderRadius.rounded,
     minHeight: Space.$8,
-    overflow: "hidden",
+    overflow: 'hidden'
   },
   disabled: {
-    opacity: 0.5,
+    opacity: 0.5
   },
   button: {
     padding: Space.$3,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     flex: 1,
-    minWidth: Space.$8,
+    minWidth: Space.$8
   },
   buttonText: {
     fontSize: fontSize.title,
-    fontFamily: "AtypTextMedium",
+    fontFamily: 'AtypTextMedium'
   },
   valueContainer: {
     paddingHorizontal: Space.$2,
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   value: {
     fontSize: fontSize.default,
-    fontFamily: "AtypTextMedium",
-    textAlign: "center",
-  },
-});
+    fontFamily: 'AtypTextMedium',
+    textAlign: 'center'
+  }
+})
