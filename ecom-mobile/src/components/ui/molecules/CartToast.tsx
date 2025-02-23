@@ -53,7 +53,12 @@ export const CartToast: React.FC = () => {
       onPress={handlePress}
       activeOpacity={0.8}
     >
-      <ThemedView style={styles.content}>
+      <ThemedView
+        style={[
+          styles.content,
+          { backgroundColor: Colors[colorScheme ?? 'light'].primary }
+        ]}
+      >
         <ThemedText
           style={[
             styles.text,

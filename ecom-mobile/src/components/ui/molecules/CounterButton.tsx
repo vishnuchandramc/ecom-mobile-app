@@ -55,7 +55,12 @@ export const CounterButton: React.FC<CounterButtonProps> = ({
         </ThemedText>
       </TouchableOpacity>
 
-      <ThemedView style={styles.valueContainer}>
+      <ThemedView
+        style={[
+          styles.valueContainer,
+          { backgroundColor: Colors[colorScheme ?? 'light'].primary }
+        ]}
+      >
         <ThemedText
           style={[
             styles.value,
