@@ -46,4 +46,4 @@ ecom-mobile/
 
 - Vishnu Chandra MC
 
-[Note: The images and placeholder text are for demonstration purposes only and should be ignored]
+[Note: The images and placeholder text are for demonstration purposes only and should be ignored (Source: Pexels)]
