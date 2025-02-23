@@ -1,12 +1,13 @@
 # BLUME - Ecommerce App
 
-BLUME is a cross-platform ecommerce application using react native.
+BLUME is a cross-platform ecommerce application using React Native.
 
-![WhatsApp Image Feb 24 2025](https://github.com/user-attachments/assets/72da8fb8-154b-43e4-b2be-165bb935099d)
-![WhatsApp Image Feb 24 2025 (2)](https://github.com/user-attachments/assets/158bab3a-bbce-4122-8d5f-91e6a2865a90)
-![WhatsApp Image Feb 24 2025 (2)](https://github.com/user-attachments/assets/e10e347d-5cc7-4110-a0ba-6c22ea481d1b)
-![WhatsApp Image Feb 24 2025 (1)](https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b)
-
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <img src="https://github.com/user-attachments/assets/72da8fb8-154b-43e4-b2be-165bb935099d" alt="WhatsApp Image Feb 24 2025" width="200"/>
+  <img src="https://github.com/user-attachments/assets/158bab3a-bbce-4122-8d5f-91e6a2865a90" alt="WhatsApp Image Feb 24 2025 (2)" width="200"/>
+  <img src="https://github.com/user-attachments/assets/e10e347d-5cc7-4110-a0ba-6c22ea481d1b" alt="WhatsApp Image Feb 24 2025 (2)" width="200"/>
+  <img src="https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b" alt="WhatsApp Image Feb 24 2025 (1)" width="200"/>
+</div>
 
 ## Features
 
@@ -33,5 +34,3 @@ APK link:
 - **AsyncStorage**: An unencrypted, asynchronous, persistent, key-value storage system for React Native.
 - **React Native Reanimated**: A library for creating complex animations in React Native.
 - **Zustand**: A small, fast, and scalable state management solution.
-
-
