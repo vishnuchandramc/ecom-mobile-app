@@ -1,7 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { router } from "expo-router";
 import { AuthService } from "@/services/AuthService";
-import { useAuthStore } from "@/store/auth";
 import { debounce } from "lodash";
 import {
   validateName,
@@ -26,7 +25,6 @@ export const useSignUp = () => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const setAuth = useAuthStore((state) => state.setAuth);
 
   const updateFormErrors = useCallback(
     (name: keyof SignUpForm, value: string) => {
@@ -95,7 +93,6 @@ export const useSignUp = () => {
         setError("Invalid response from server");
       }
     } catch (err) {
-      console.log("Signup failed", err);
       setError(err instanceof Error ? err.message : "Signup failed");
     } finally {
       setLoading(false);

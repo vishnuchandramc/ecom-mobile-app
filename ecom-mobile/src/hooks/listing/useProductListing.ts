@@ -49,9 +49,10 @@ export const useProductListing = (params?: ProductListingParams) => {
     [params?.categoryId, params?.keyword]
   );
 
-  // Initial load
   useEffect(() => {
     setIsLoading(true);
+    // Call fetchProducts with initial offset of 0 to load first page
+    // When the fetch completes (whether successful or failed), set loading to false
     fetchProducts(0).finally(() => setIsLoading(false));
   }, [params?.categoryId, params?.keyword]);
 

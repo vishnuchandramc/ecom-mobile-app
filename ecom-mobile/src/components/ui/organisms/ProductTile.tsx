@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
-  Image,
-  View,
   useColorScheme,
   StyleProp,
   ViewStyle,
@@ -13,6 +11,7 @@ import { CounterButton } from "../molecules/CounterButton";
 import { BorderRadius, Colors, Space } from "@/constants";
 import useCartStore from "@/store/cart";
 import { Product } from "@/models/ProductModel";
+import Image from "../molecules/Image";
 
 interface ProductTileProps {
   item: Product;

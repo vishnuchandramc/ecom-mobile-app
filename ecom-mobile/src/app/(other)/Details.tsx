@@ -2,58 +2,52 @@ import {
   ScrollView,
   StyleSheet,
   useColorScheme,
-  useWindowDimensions,
-} from "react-native";
-import { ThemedView } from "@/components/ui/atoms/ThemedView";
-import { ThemedText } from "@/components/ui/atoms/ThemedText";
-import { router, useLocalSearchParams } from "expo-router";
-import { useProductDetails } from "@/hooks/listing/useProductDetails";
+  useWindowDimensions
+} from 'react-native'
+import { ThemedView } from '@/components/ui/atoms/ThemedView'
+import { ThemedText } from '@/components/ui/atoms/ThemedText'
+import { router, useLocalSearchParams } from 'expo-router'
+import { useProductDetails } from '@/hooks/listing/useProductDetails'
+import { Carousel } from '@/components/ui/organisms/Carausel'
+import { Colors, Space } from '@/constants'
+import { Ionicons } from '@expo/vector-icons'
+import Header from '@/components/ui/molecules/Header'
+import { Chip } from '@/components/ui/molecules/Chip'
+import { BottomBar } from '@/components/ui/organisms/BottomBar'
+import CustomActivityIndicator from '@/components/ui/organisms/ActivityIndicator'
+import EmptyListIndicator from '@/components/ui/organisms/EmptyListIndicator'
+import Wrapper from '@/components/ui/molecules/Wrapper'
 
-import { Carousel } from "@/components/ui/organisms/Carausel";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Colors, Space } from "@/constants";
-import { Ionicons } from "@expo/vector-icons";
-import Header from "@/components/ui/molecules/Header";
-import { Chip } from "@/components/ui/molecules/Chip";
-import { BottomBar } from "@/components/ui/organisms/BottomBar";
 const Details = () => {
-  const colorScheme = useColorScheme();
-  const { width } = useWindowDimensions();
+  const colorScheme = useColorScheme()
+  const { width } = useWindowDimensions()
   const { id } = useLocalSearchParams<{
-    id: string;
-  }>();
+    id: string
+  }>()
 
-  const { product, isLoading, error } = useProductDetails(id);
+  const { product, isLoading, error } = useProductDetails(id)
 
   if (isLoading) {
-    return (
-      <ThemedView>
-        <ThemedText>Loading...</ThemedText>
-      </ThemedView>
-    );
+    return <CustomActivityIndicator />
   }
 
   if (error || !product) {
     return (
-      <ThemedView>
-        <ThemedText>No data found</ThemedText>
-      </ThemedView>
-    );
+      <EmptyListIndicator
+        title='Something went wrong'
+        description='Please try again later'
+      />
+    )
   }
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: Colors[colorScheme ?? "light"].background,
-      }}
-    >
+    <Wrapper>
       <Header
-        title={"Details"}
+        title={'Details'}
         leftIcon={
           <Ionicons
-            name="chevron-back"
-            color={Colors[colorScheme ?? "light"].primary}
+            name='chevron-back'
+            color={Colors[colorScheme ?? 'light'].primary}
             size={24}
             onPress={() => router.back()}
           />
@@ -61,30 +55,30 @@ const Details = () => {
       />
       <ScrollView
         style={styles.container}
-        contentContainerStyle={{ paddingBottom: 120 }}
+        contentContainerStyle={styles.scrollview}
       >
         <Carousel images={product.images} height={400} width={width} />
         <ThemedView style={styles.productInfo}>
-          <ThemedText type="hero" style={styles.title}>
+          <ThemedText type='hero' style={styles.title}>
             {product.title}
           </ThemedText>
           <ThemedView style={styles.priceContainer}>
             <Chip
               title={product.category.name}
-              textColor={Colors[colorScheme ?? "light"].background}
+              textColor={Colors[colorScheme ?? 'light'].background}
               style={{
-                backgroundColor: Colors[colorScheme ?? "light"].primary,
+                backgroundColor: Colors[colorScheme ?? 'light'].primary
               }}
             />
           </ThemedView>
-          <ThemedText type="hero" style={styles.price}>
+          <ThemedText type='hero' style={styles.price}>
             ${product.price}
           </ThemedText>
           <ThemedView
             style={{
               borderBottomWidth: 1,
-              borderBottomColor: Colors[colorScheme ?? "light"].border,
-              marginVertical: Space.$4,
+              borderBottomColor: Colors[colorScheme ?? 'light'].border,
+              marginVertical: Space.$4
             }}
           />
           <ThemedText style={styles.description}>
@@ -95,36 +89,39 @@ const Details = () => {
       <ThemedView style={styles.bottomBar}>
         <BottomBar item={product} />
       </ThemedView>
-    </SafeAreaView>
-  );
-};
-export default Details;
+    </Wrapper>
+  )
+}
+export default Details
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: "auto",
+    marginHorizontal: 'auto'
   },
   productInfo: {
     marginTop: Space.$4,
-    marginHorizontal: Space.$4,
+    marginHorizontal: Space.$4
   },
   title: {
-    marginBottom: 12,
+    marginBottom: Space.$3
   },
   price: {
-    marginBottom: 16,
+    marginBottom: Space.$4
   },
   description: {
-    lineHeight: 24,
+    lineHeight: 24
   },
   priceContainer: {
-    flexDirection: "row",
-    marginBottom: 16,
+    flexDirection: 'row',
+    marginBottom: Space.$4
   },
   bottomBar: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    marginHorizontal: Space.$4,
+    marginHorizontal: Space.$4
   },
-});
+  scrollview: {
+    paddingBottom: 200
+  }
+})

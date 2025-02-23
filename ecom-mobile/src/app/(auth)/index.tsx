@@ -3,46 +3,40 @@ import {
   StyleSheet,
   useColorScheme,
   useWindowDimensions,
-  View,
-} from "react-native";
-import { router } from "expo-router";
-import { Marquee } from "@/components/ui/organisms/Marquee";
-import { Colors, Space } from "@/constants";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Header from "@/components/ui/molecules/Header";
-import { ThemedText, ThemedView } from "@/components/ui/atoms";
-import { Button } from "@/components/ui/molecules";
+  View
+} from 'react-native'
+import { router } from 'expo-router'
+import { Marquee } from '@/components/ui/organisms/Marquee'
+import { Colors, Space } from '@/constants'
+import Header from '@/components/ui/molecules/Header'
+import { ThemedText, ThemedView } from '@/components/ui/atoms'
+import { Button } from '@/components/ui/molecules'
+import Wrapper from '@/components/ui/molecules/Wrapper'
 
 const Auth = () => {
-  const colorScheme = useColorScheme();
-  const { width } = useWindowDimensions();
+  const colorScheme = useColorScheme()
+  const { width } = useWindowDimensions()
 
   const handleSignUp = () => {
-    router.navigate("/(auth)/screens/Signup");
-  };
+    router.navigate('/(auth)/screens/Signup')
+  }
 
   const handleLogin = () => {
-    router.navigate("/(auth)/screens/Login");
-  };
+    router.navigate('/(auth)/screens/Login')
+  }
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: Colors[colorScheme ?? "light"].background,
-      }}
-      edges={["bottom", "top"]}
-    >
+    <Wrapper style={styles.wrapper}>
       <ThemedView style={styles.container}>
-        <Header title="BLUME." titleStyle={styles.title} />
+        <Header title='BLUME.' titleStyle={styles.title} />
         <View style={styles.contentContainer}>
           <Marquee
             images={[
-              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image1.jpg?raw=true",
-              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image2.jpg?raw=true",
-              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image3.jpg?raw=true",
-              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true",
-              "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image5.jpg?raw=true",
+              'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image1.jpg?raw=true',
+              'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image2.jpg?raw=true',
+              'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image3.jpg?raw=true',
+              'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true',
+              'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image5.jpg?raw=true'
             ]}
             height={width * 0.6}
             gap={Space.$5}
@@ -50,23 +44,23 @@ const Auth = () => {
             style={{ marginBottom: Space.$8 }}
           />
           <ThemedText
-            type="hero"
+            type='hero'
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               paddingVertical: Space.$5,
-              width: "80%",
-              alignSelf: "center",
+              width: '80%',
+              alignSelf: 'center'
             }}
           >
             Discover your next favourite in our latest collection.
           </ThemedText>
           <ThemedText
-            type="default"
+            type='default'
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               paddingVertical: Space.$3,
-              width: "80%",
-              alignSelf: "center",
+              width: '80%',
+              alignSelf: 'center'
             }}
           >
             Upgrade your look with new arrivals. Grab your favourite pieces and
@@ -75,11 +69,11 @@ const Auth = () => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <Button variant="primary" onPress={handleSignUp}>
+          <Button variant='primary' onPress={handleSignUp}>
             Sign up with email
           </Button>
           <Button
-            variant="secondary"
+            variant='secondary'
             onPress={handleLogin}
             style={{ marginTop: Space.$2 }}
           >
@@ -87,27 +81,30 @@ const Auth = () => {
           </Button>
         </View>
       </ThemedView>
-    </SafeAreaView>
-  );
-};
+    </Wrapper>
+  )
+}
 
-export default Auth;
+export default Auth
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Space.$5,
+    paddingHorizontal: Space.$5
+  },
+  wrapper: {
+    paddingHorizontal: 0
   },
   title: {
-    fontFamily: "AtypTextBold",
+    fontFamily: 'AtypTextBold'
   },
   contentContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonContainer: {
-    width: "100%",
-    paddingBottom: Platform.OS === "android" ? Space.$4 : Space.$3,
-  },
-});
+    width: '100%',
+    paddingBottom: Platform.OS === 'android' ? Space.$4 : Space.$3
+  }
+})

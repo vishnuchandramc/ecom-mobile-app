@@ -4,6 +4,7 @@ import { AuthService } from "@/services/AuthService";
 import { useAuthStore } from "@/store/auth";
 import { debounce } from "lodash";
 import { FormErrors, LoginForm } from "@/models/AuthModels";
+import { validateEmail, validatePassword } from "@/utils/Utils";
 
 export const useLogin = () => {
   const [form, setForm] = useState<LoginForm>({
@@ -17,26 +18,6 @@ export const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const setAuth = useAuthStore((state) => state.setAuth);
-
-  const validateEmail = (email: string) => {
-    if (!email.trim()) {
-      return "Email is required";
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return "Invalid email format";
-    }
-    return null;
-  };
-
-  const validatePassword = (password: string) => {
-    if (!password) {
-      return "Password is required";
-    }
-    if (!/^[A-Za-z0-9]+$/.test(password)) {
-      return "Password must contain only letters and numbers";
-    }
-    return null;
-  };
 
   const updateFormErrors = useCallback(
     (name: keyof LoginForm, value: string) => {

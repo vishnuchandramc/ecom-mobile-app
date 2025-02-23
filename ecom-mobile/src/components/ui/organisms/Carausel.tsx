@@ -1,40 +1,41 @@
-import React from "react";
-import { View, Image, Dimensions, StyleSheet } from "react-native";
+import React from 'react'
+import { Dimensions, StyleSheet } from 'react-native'
 import Animated, {
   useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   interpolate,
-  withSpring,
-} from "react-native-reanimated";
-import { ThemedView } from "../atoms";
+  withSpring
+} from 'react-native-reanimated'
+import { ThemedView } from '../atoms'
+import Image from '../molecules/Image'
 
 interface CarouselProps {
-  images: string[];
-  children?: React.ReactNode;
-  height?: number;
-  width?: number;
-  indicatorColor?: string;
-  activeIndicatorColor?: string;
+  images: string[]
+  children?: React.ReactNode
+  height?: number
+  width?: number
+  indicatorColor?: string
+  activeIndicatorColor?: string
 }
 
-const { width: screenWidth } = Dimensions.get("window");
+const { width: screenWidth } = Dimensions.get('window')
 
 export const Carousel: React.FC<CarouselProps> = ({
   images,
   children,
   width = screenWidth,
   height = 300,
-  indicatorColor = "#ffffff80",
-  activeIndicatorColor = "#ffffff",
+  indicatorColor = '#ffffff80',
+  activeIndicatorColor = '#ffffff'
 }) => {
-  const translateX = useSharedValue(0);
+  const translateX = useSharedValue(0)
 
   const scrollHandler = useAnimatedScrollHandler({
-    onScroll: (event) => {
-      translateX.value = event.contentOffset.x;
-    },
-  });
+    onScroll: event => {
+      translateX.value = event.contentOffset.x
+    }
+  })
 
   return (
     <ThemedView style={[styles.container, { height }]}>
@@ -49,11 +50,7 @@ export const Carousel: React.FC<CarouselProps> = ({
       >
         {images.map((image, index) => (
           <ThemedView key={index} style={[styles.slide, { width }]}>
-            <Image
-              source={{ uri: image }}
-              style={styles.image}
-              resizeMode="cover"
-            />
+            <Image source={{ uri: image }} style={styles.image} />
           </ThemedView>
         ))}
       </Animated.ScrollView>
@@ -73,15 +70,15 @@ export const Carousel: React.FC<CarouselProps> = ({
         </ThemedView>
       )}
     </ThemedView>
-  );
-};
+  )
+}
 
 interface IndicatorProps {
-  index: number;
-  translateX: Animated.SharedValue<number>;
-  activeColor: string;
-  inactiveColor: string;
-  width: number;
+  index: number
+  translateX: Animated.SharedValue<number>
+  activeColor: string
+  inactiveColor: string
+  width: number
 }
 
 const CarouselIndicator: React.FC<IndicatorProps> = ({
@@ -89,64 +86,64 @@ const CarouselIndicator: React.FC<IndicatorProps> = ({
   translateX,
   activeColor,
   inactiveColor,
-  width,
+  width
 }) => {
   const animatedStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
       translateX.value,
       [(index - 1) * width, index * width, (index + 1) * width],
       [0.5, 1, 0.5],
-      "clamp"
-    );
+      'clamp'
+    )
 
     const scale = interpolate(
       translateX.value,
       [(index - 1) * width, index * width, (index + 1) * width],
       [1, 1.2, 1],
-      "clamp"
-    );
+      'clamp'
+    )
 
     return {
       opacity,
       transform: [{ scale: withSpring(scale) }],
-      backgroundColor: opacity === 1 ? activeColor : inactiveColor,
-    };
-  });
+      backgroundColor: opacity === 1 ? activeColor : inactiveColor
+    }
+  })
 
-  return <Animated.View style={[styles.indicator, animatedStyle]} />;
-};
+  return <Animated.View style={[styles.indicator, animatedStyle]} />
+}
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    position: 'relative'
   },
   slide: {
-    height: "100%",
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
+    height: '100%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
-    width: "100%",
-    height: "100%",
+    width: '100%',
+    height: '100%'
   },
   indicatorContainer: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 20,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignSelf: "center",
-    backgroundColor: "transparent",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: 'transparent'
   },
   indicator: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginHorizontal: 4,
+    marginHorizontal: 4
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "transparent",
-    zIndex: 1,
-  },
-});
+    backgroundColor: 'transparent',
+    zIndex: 1
+  }
+})

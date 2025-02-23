@@ -1,28 +1,28 @@
-import React from "react";
-import { StyleSheet, useColorScheme } from "react-native";
-import { ThemedView } from "../atoms";
-import { ThemedText } from "../atoms/ThemedText";
-import { Button, CounterButton } from "../molecules";
-import { Space } from "@/constants/Space";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import useCartStore from "@/store/cart";
-import { Product } from "@/models/ProductModel";
-import { Colors } from "@/constants";
+import React from 'react'
+import { StyleSheet, useColorScheme } from 'react-native'
+import { ThemedView } from '../atoms'
+import { ThemedText } from '../atoms/ThemedText'
+import { Button, CounterButton } from '../molecules'
+import { Space } from '@/constants/Space'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import useCartStore from '@/store/cart'
+import { Product } from '@/models/ProductModel'
+import { Colors } from '@/constants'
 
 interface BottomBarProps {
-  item: Product;
+  item: Product
 }
 
 export const BottomBar = ({ item }: BottomBarProps) => {
-  const insets = useSafeAreaInsets();
-  const colorScheme = useColorScheme();
-  const itemQuantity = useCartStore((state) =>
+  const insets = useSafeAreaInsets()
+  const colorScheme = useColorScheme()
+  const itemQuantity = useCartStore(state =>
     state.getItemQuantity(item.id.toString())
-  );
+  )
 
-  const cartStore = useCartStore();
-  const onIncrement = () => cartStore.addItem(item);
-  const onDecrement = () => cartStore.removeItem(item.id.toString());
+  const cartStore = useCartStore()
+  const onIncrement = () => cartStore.addItem(item)
+  const onDecrement = () => cartStore.removeItem(item.id.toString())
 
   return (
     <ThemedView
@@ -30,18 +30,18 @@ export const BottomBar = ({ item }: BottomBarProps) => {
         styles.container,
         {
           paddingBottom: insets.bottom,
-          backgroundColor: Colors[colorScheme || "light"].background,
-          borderColor: Colors[colorScheme || "light"].border,
-        },
+          backgroundColor: Colors[colorScheme || 'light'].background,
+          borderColor: Colors[colorScheme || 'light'].border
+        }
       ]}
     >
       <ThemedView style={styles.content}>
         <ThemedView>
-          <ThemedText type="default">Price</ThemedText>
-          <ThemedText type="title" style={styles.price}>
+          <ThemedText type='default'>Price</ThemedText>
+          <ThemedText type='title' style={styles.price}>
             ${itemQuantity === 0 ? item.price : item.price * itemQuantity}
           </ThemedText>
-          <ThemedText style={{ fontSize: 12 }} type="default">
+          <ThemedText style={{ fontSize: 12 }} type='default'>
             Exclusive all taxes
           </ThemedText>
         </ThemedView>
@@ -54,35 +54,36 @@ export const BottomBar = ({ item }: BottomBarProps) => {
             style={{ minWidth: 140, paddingVertical: Space.$1 }}
           />
         ) : (
-          <Button variant="primary" onPress={onIncrement} style={styles.button}>
+          <Button variant='primary' onPress={onIncrement} style={styles.button}>
             Add to cart
           </Button>
         )}
       </ThemedView>
     </ThemedView>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
     borderTopWidth: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white'
   },
   content: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: Space.$4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: Space.$1,
+    paddingVertical: Space.$4
   },
   price: {
-    flex: 1,
+    flex: 1
   },
   button: {
     minWidth: 140,
-    paddingVertical: Space.$4,
-  },
-});
+    paddingVertical: Space.$4
+  }
+})
