@@ -1,23 +1,19 @@
-import React from "react";
-import {
-  StyleSheet,
-  useColorScheme,
-  ActivityIndicator,
-  Text,
-} from "react-native";
-import { useProductListing } from "@/hooks/listing/useProductListing";
-import { Colors, Space } from "@/constants";
-import { ThemedView } from "@/components/ui/atoms";
-import Header from "@/components/ui/molecules/Header";
-import { FlashList } from "@shopify/flash-list";
-import { router, useLocalSearchParams } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import ProductItem from "@/components/ui/organisms/Product";
+import React from 'react'
+import { StyleSheet, useColorScheme, ActivityIndicator } from 'react-native'
+import { useProductListing } from '@/hooks/listing/useProductListing'
+import { Colors, Space } from '@/constants'
+import { ThemedView } from '@/components/ui/atoms'
+import Header from '@/components/ui/molecules/Header'
+import { FlashList } from '@shopify/flash-list'
+import { router, useLocalSearchParams } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
+import ProductItem from '@/components/ui/organisms/Product'
+import EmptyListIndicator from '@/components/ui/organisms/EmptyListIndicator'
+import Wrapper from '@/components/ui/molecules/Wrapper'
 
 const CategoryList = () => {
-  const colorScheme = useColorScheme();
-  const { categoryId } = useLocalSearchParams<{ categoryId: string }>();
+  const colorScheme = useColorScheme()
+  const { categoryId } = useLocalSearchParams<{ categoryId: string }>()
 
   const {
     products,
@@ -26,45 +22,42 @@ const CategoryList = () => {
     loadMore,
     isLoadingMore,
     refresh,
-    isRefreshing,
+    isRefreshing
   } = useProductListing({
-    categoryId: Number(categoryId),
-  });
+    categoryId: Number(categoryId)
+  })
 
   if (isLoading) {
     return (
       <ThemedView style={[styles.container, styles.centered]}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size='large' />
       </ThemedView>
-    );
+    )
   }
 
-  if (error) {
+  if (error || !products) {
     return (
-      <ThemedView style={[styles.container, styles.centered]}>
-        <Text>{error}</Text>
-      </ThemedView>
-    );
+      <EmptyListIndicator
+        title='No products found'
+        description='Please try again later'
+      />
+    )
   }
 
   return (
-    <SafeAreaView
-      style={[
-        { flex: 1, backgroundColor: Colors[colorScheme ?? "light"].background },
-      ]}
-    >
+    <Wrapper>
       <ThemedView
         style={[
           styles.container,
-          { backgroundColor: Colors[colorScheme ?? "light"].background },
+          { backgroundColor: Colors[colorScheme ?? 'light'].background }
         ]}
       >
         <Header
-          title={products?.[0]?.category?.name || "Category"}
+          title={products?.[0]?.category?.name || 'Category'}
           leftIcon={
             <Ionicons
-              name="chevron-back"
-              color={Colors[colorScheme ?? "light"].primary}
+              name='chevron-back'
+              color={Colors[colorScheme ?? 'light'].primary}
               size={24}
               onPress={() => router.back()}
             />
@@ -83,22 +76,22 @@ const CategoryList = () => {
           renderItem={({ item }) => <ProductItem item={item} />}
         />
       </ThemedView>
-    </SafeAreaView>
-  );
-};
+    </Wrapper>
+  )
+}
 
-export default CategoryList;
+export default CategoryList
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: Space.$2,
+    marginHorizontal: Space.$2
   },
   centered: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   footer: {
-    padding: Space.$4,
-  },
-});
+    padding: Space.$4
+  }
+})

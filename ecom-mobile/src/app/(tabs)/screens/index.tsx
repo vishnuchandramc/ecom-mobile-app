@@ -3,42 +3,48 @@ import {
   Pressable,
   StyleSheet,
   useColorScheme,
-  useWindowDimensions,
-} from "react-native";
-import React from "react";
-import CartIcon from "@/assets/icons/CartIcon";
-import { Colors, Space } from "@/constants";
-import { Button, Search } from "@/components/ui/molecules";
-import { Carousel } from "@/components/ui/organisms/Carausel";
-import { LinearGradient } from "expo-linear-gradient";
-import { ThemedView, ThemedText } from "@/components/ui/atoms";
-import Header from "@/components/ui/molecules/Header";
-import { useCategoryList } from "@/hooks/listing/useCategoryList";
-import { FlashList } from "@shopify/flash-list";
-import Card from "@/components/ui/organisms/Card";
-import TitleContainer from "@/components/ui/molecules/TitleContainer";
-import Footer from "@/components/ui/organisms/Footer";
-import { router } from "expo-router";
+  useWindowDimensions
+} from 'react-native'
+import React from 'react'
+import CartIcon from '@/assets/icons/CartIcon'
+import { Colors, Space } from '@/constants'
+import { Button, Search } from '@/components/ui/molecules'
+import { Carousel } from '@/components/ui/organisms/Carausel'
+import { LinearGradient } from 'expo-linear-gradient'
+import { ThemedView, ThemedText } from '@/components/ui/atoms'
+import Header from '@/components/ui/molecules/Header'
+import { useCategoryList } from '@/hooks/listing/useCategoryList'
+import { FlashList } from '@shopify/flash-list'
+import Card from '@/components/ui/organisms/Card'
+import TitleContainer from '@/components/ui/molecules/TitleContainer'
+import Footer from '@/components/ui/organisms/Footer'
+import { router } from 'expo-router'
+import EmptyListIndicator from '@/components/ui/organisms/EmptyListIndicator'
 
 const index = () => {
-  const colorScheme = useColorScheme();
-  const { width } = useWindowDimensions();
+  const colorScheme = useColorScheme()
+  const { width } = useWindowDimensions()
 
-  const { categories, isLoading, error } = useCategoryList();
+  const { categories, isLoading, error } = useCategoryList()
 
   if (isLoading) {
     return (
       <ThemedView style={[styles.container, styles.centered]}>
         <ActivityIndicator
-          size="large"
-          color={Colors[colorScheme ?? "light"].primary}
+          size='large'
+          color={Colors[colorScheme ?? 'light'].primary}
         />
       </ThemedView>
-    );
+    )
   }
 
-  if (error) {
-    return <ThemedView style={styles.container}></ThemedView>;
+  if (error || !categories) {
+    return (
+      <EmptyListIndicator
+        title='Something went wrong'
+        description='Please try again later'
+      />
+    )
   }
 
   const ListHeaderComponent = () => {
@@ -46,81 +52,81 @@ const index = () => {
       <ThemedView>
         <Carousel
           images={[
-            "https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true"
+            'https://github.com/vishnuchandramc/ecom-mobile-app/blob/code_refactor/ecom-mobile/src/assets/images/image4.jpg?raw=true'
           ]}
-          activeIndicatorColor={Colors[colorScheme ?? "light"].primary}
-          indicatorColor={Colors[colorScheme ?? "light"].primary}
+          activeIndicatorColor={Colors[colorScheme ?? 'light'].primary}
+          indicatorColor={Colors[colorScheme ?? 'light'].primary}
           width={width - Space.$1 * 2}
         >
           <LinearGradient
-            colors={["transparent", "rgba(0,0,0,0.8)"]}
+            colors={['transparent', 'rgba(0,0,0,0.8)']}
             style={{
-              position: "absolute",
+              position: 'absolute',
               left: 0,
               right: 0,
               bottom: 0,
-              height: 100,
+              height: 100
             }}
           />
           <ThemedView
             style={{
               flex: 1,
-              backgroundColor: "transparent",
-              flexDirection: "column-reverse",
+              backgroundColor: 'transparent',
+              flexDirection: 'column-reverse',
               paddingHorizontal: Space.$4,
-              paddingBottom: Space.$6,
+              paddingBottom: Space.$6
             }}
           >
             <Button
-              variant="tertiary"
+              variant='tertiary'
               onPress={() => {
-                router.navigate("/screens/explore");
+                router.navigate('/screens/explore')
               }}
               textStyle={{
-                color: Colors["dark"].primary,
+                color: Colors['dark'].primary
               }}
               style={{
                 width: 80,
-                alignSelf: "flex-start",
+                alignSelf: 'flex-start',
                 paddingHorizontal: 0,
-                paddingVertical: Space.$2,
+                paddingVertical: Space.$2
               }}
             >
               Shop now
             </Button>
             <ThemedText
-              type="default"
-              style={{ color: Colors["dark"].primary }}
+              type='default'
+              style={{ color: Colors['dark'].primary }}
             >
               Available for a limited time
             </ThemedText>
-            <ThemedText type="title" style={{ color: Colors["dark"].primary }}>
+            <ThemedText type='title' style={{ color: Colors['dark'].primary }}>
               Summer 2025 best deals
             </ThemedText>
           </ThemedView>
         </Carousel>
         <TitleContainer
-          title="Shop by category"
-          subtitle="Explore our wide range of categories"
+          title='Shop by category'
+          subtitle='Explore our wide range of categories'
         />
       </ThemedView>
-    );
-  };
+    )
+  }
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.headerContainer}>
         <Header
-          title="BLUME."
+          title='BLUME.'
           titleStyle={styles.title}
           rightIcon={
             <Pressable
               onPress={() => {
-                router.navigate(`/(other)/Cart`);
+                router.navigate(`/(other)/Cart`)
               }}
             >
               <ThemedView style={{ padding: Space.$1 }}>
                 <CartIcon
-                  color={Colors[colorScheme ?? "light"].primary}
+                  color={Colors[colorScheme ?? 'light'].primary}
                   size={Space.$5}
                 />
               </ThemedView>
@@ -130,12 +136,12 @@ const index = () => {
       </ThemedView>
       <ThemedView style={styles.contentContainer}>
         <Search
-          onSearch={() => { }}
+          onSearch={() => {}}
           showFilter={false}
           isClickable={true}
           inputStyle={{ paddingVertical: Space.$1 }}
           onPress={() => {
-            router.navigate("/screens/explore");
+            router.navigate('/screens/explore')
           }}
         />
       </ThemedView>
@@ -153,7 +159,7 @@ const index = () => {
               style={{ borderWidth: 1 }}
               showATCButton={false}
               onPress={() => {
-                router.navigate(`/(other)/CategoryList?categoryId=${item.id}`);
+                router.navigate(`/(other)/CategoryList?categoryId=${item.id}`)
               }}
             />
           </ThemedView>
@@ -161,32 +167,32 @@ const index = () => {
         ListFooterComponent={Footer}
       />
     </ThemedView>
-  );
-};
+  )
+}
 
-export default index;
+export default index
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Space.$1,
+    paddingHorizontal: Space.$1
   },
   centered: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   title: {
-    fontFamily: "AtypTextBold",
+    fontFamily: 'AtypTextBold'
   },
   headerContainer: {
-    paddingHorizontal: Space.$3,
+    paddingHorizontal: Space.$3
   },
   contentContainer: {
     paddingVertical: Space.$5,
-    paddingHorizontal: Space.$3,
+    paddingHorizontal: Space.$3
   },
   buttonContainer: {
-    width: "100%",
-    paddingBottom: 100,
-  },
-});
+    width: '100%',
+    paddingBottom: 100
+  }
+})

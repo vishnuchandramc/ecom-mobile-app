@@ -1,66 +1,62 @@
-import { StyleSheet, useColorScheme } from "react-native";
-import React from "react";
-import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
-import { ThemedText, ThemedView, ThemedInput } from "@/components/ui/atoms";
-import { Button } from "@/components/ui/molecules";
-import { Colors, Space } from "@/constants";
-import { useLogin } from "@/hooks/auth/useLogin";
+import { StyleSheet, useColorScheme } from 'react-native'
+import React from 'react'
+import { router } from 'expo-router'
+import { Ionicons } from '@expo/vector-icons'
+import { ThemedText, ThemedView, ThemedInput } from '@/components/ui/atoms'
+import { Button } from '@/components/ui/molecules'
+import { Colors, Space } from '@/constants'
+import { useLogin } from '@/hooks/auth/useLogin'
+import Wrapper from '@/components/ui/molecules/Wrapper'
 
 const Login = () => {
-  const colorScheme = useColorScheme();
+  const colorScheme = useColorScheme()
   const { form, formErrors, loading, error, handleChange, handleSubmit } =
-    useLogin();
+    useLogin()
 
   return (
-    <ThemedView
-      style={[
-        styles.container,
-        { backgroundColor: Colors[colorScheme ?? "light"].background },
-      ]}
-    >
+    <Wrapper style={styles.wrapper}>
       <Button
-        variant="tertiary"
+        variant='tertiary'
         style={styles.closeButton}
         onPress={() => router.back()}
       >
         <Ionicons
-          name="close"
+          name='close'
           size={24}
-          color={Colors[colorScheme ?? "light"].primary}
+          color={Colors[colorScheme ?? 'light'].primary}
         />
       </Button>
 
-      <ThemedText type="title" style={[styles.title]}>
+      <ThemedText type='title' style={[styles.title]}>
         Welcome Back
       </ThemedText>
-      <ThemedText type="default" style={[styles.subtitle]}>
+      <ThemedText type='default' style={[styles.subtitle]}>
         Login with your email and password
       </ThemedText>
 
       <ThemedInput
-        placeholder="Email"
+        placeholder='Email'
         value={form.email}
-        onChangeText={handleChange("email")}
-        keyboardType="email-address"
-        autoCapitalize="none"
+        onChangeText={handleChange('email')}
+        keyboardType='email-address'
+        autoCapitalize='none'
         error={formErrors.email ?? undefined}
       />
 
       <ThemedInput
-        placeholder="Password"
+        placeholder='Password'
         value={form.password}
-        onChangeText={handleChange("password")}
+        onChangeText={handleChange('password')}
         secureTextEntry
         error={formErrors.password ?? undefined}
       />
 
       {error && (
         <ThemedText
-          type="default"
+          type='default'
           style={[
             styles.error,
-            { color: Colors[colorScheme ?? "light"].error },
+            { color: Colors[colorScheme ?? 'light'].error }
           ]}
         >
           {error}
@@ -68,81 +64,79 @@ const Login = () => {
       )}
 
       <Button
-        variant="primary"
+        variant='primary'
         style={styles.button}
         onPress={handleSubmit}
         disabled={
-          loading || Object.values(formErrors).some((error) => error !== null)
+          loading || Object.values(formErrors).some(error => error !== null)
         }
       >
-        {loading ? "Loading..." : "Login"}
+        {loading ? 'Loading...' : 'Login'}
       </Button>
 
       <ThemedView
         style={[
           styles.footer,
-          { backgroundColor: Colors[colorScheme ?? "light"].background },
+          { backgroundColor: Colors[colorScheme ?? 'light'].background }
         ]}
       >
         <ThemedText
-          type="default"
-          style={[{ color: Colors[colorScheme ?? "light"].primary }]}
+          type='default'
+          style={[{ color: Colors[colorScheme ?? 'light'].primary }]}
         >
-          Don't have an account?{" "}
+          Don't have an account?{' '}
         </ThemedText>
         <Button
-          variant="tertiary"
+          variant='tertiary'
           style={styles.link}
-          onPress={() => router.push("/(auth)/screens/Signup")}
+          onPress={() => router.push('/(auth)/screens/Signup')}
         >
           Sign up
         </Button>
       </ThemedView>
-    </ThemedView>
-  );
-};
+    </Wrapper>
+  )
+}
 
-export default Login;
+export default Login
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: Space.$4,
-    justifyContent: "center",
-  },
   closeButton: {
-    position: "absolute",
+    position: 'absolute',
     top: 60,
     right: 40,
     zIndex: 1,
-    padding: Space.$2,
+    padding: Space.$2
   },
   title: {
     marginBottom: Space.$2,
-    textAlign: "center",
+    textAlign: 'center'
   },
   subtitle: {
     marginBottom: Space.$4,
-    textAlign: "center",
-    width: "80%",
-    alignSelf: "center",
+    textAlign: 'center',
+    width: '80%',
+    alignSelf: 'center'
   },
   button: {
-    marginTop: Space.$4,
+    marginTop: Space.$4
   },
   footer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: Space.$4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: Space.$4
   },
   link: {
     paddingVertical: 0,
-    paddingHorizontal: 0,
+    paddingHorizontal: 0
   },
   error: {
     marginTop: Space.$2,
     marginBottom: Space.$4,
-    textAlign: "center",
+    textAlign: 'center'
   },
-});
+  wrapper: {
+    paddingHorizontal: Space.$4
+  }
+})
