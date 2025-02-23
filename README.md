@@ -16,7 +16,7 @@ BLUME is a cross-platform ecommerce application designed to provide a seamless s
 
 BLUME is built using Expo, which simplifies the development process and allows for easy deployment across multiple platforms.
 
-APK link: https://drive.google.com/file/d/1r9yZZZa_n32TWAWCohQlWO8bHDE8bcUL/view?usp=sharing
+APK link:
 
 ## Technologies Used
 
