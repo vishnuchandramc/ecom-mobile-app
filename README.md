@@ -2,6 +2,7 @@
 
 BLUME is a cross-platform ecommerce application using React Native.
 
+
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
   <img src="https://github.com/user-attachments/assets/72da8fb8-154b-43e4-b2be-165bb935099d" alt="WhatsApp Image Feb 24 2025" width="200"/>
   <img src="https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b" alt="WhatsApp Image Feb 24 2025 (1)" width="200"/>
@@ -33,6 +34,7 @@ For a video demonstration, please [click here](https://github.com/user-attachmen
 BLUME is built using Expo, which simplifies the development process and allows for easy deployment across multiple platforms.
 
 APK link:
+API: https://fakeapi.platzi.com/
 
 ## Technologies Used
 
