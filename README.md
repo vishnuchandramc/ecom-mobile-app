@@ -4,14 +4,19 @@ BLUME is a cross-platform ecommerce application using React Native.
 
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
   <img src="https://github.com/user-attachments/assets/72da8fb8-154b-43e4-b2be-165bb935099d" alt="WhatsApp Image Feb 24 2025" width="200"/>
-   <img src="https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b" alt="WhatsApp Image Feb 24 2025 (1)" width="200"/>
+  <img src="https://github.com/user-attachments/assets/4e4f9fc6-5298-4278-bd45-faadc005927b" alt="WhatsApp Image Feb 24 2025 (1)" width="200"/>
   <img src="https://github.com/user-attachments/assets/e10e347d-5cc7-4110-a0ba-6c22ea481d1b" alt="WhatsApp Image Feb 24 2025 (2)" width="200"/>
- 
-
-  https://github.com/user-attachments/assets/a3d4e993-d872-4415-8886-b56955448915
-
-
 </div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+  <img src="https://github.com/user-attachments/assets/26e617f8-9174-475e-878c-228ce4a49346" alt="WhatsApp Image Feb 24 2025 (5)" width="200"/>
+  <img src="https://github.com/user-attachments/assets/b76e4bbd-c630-4f63-bb9f-478248948f63" alt="WhatsApp Image Feb 24 2025 (3)" width="200"/>
+  <img src="https://github.com/user-attachments/assets/55d62baf-718f-44be-87c5-8335c8151f06" alt="WhatsApp Image Feb 24 2025 (6)" width="200"/>
+</div>
+
+## Video
+
+For a video demonstration, please [click here](https://github.com/user-attachments/assets/a3d4e993-d872-4415-8886-b56955448915).
 
 ## Features
 
