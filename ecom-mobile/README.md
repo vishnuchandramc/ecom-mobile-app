@@ -1,50 +1,139 @@
-# Welcome to your Expo app 👋
+# E-Commerce Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, feature-rich e-commerce mobile application built with React Native and Expo. This application provides a seamless shopping experience with a beautiful user interface and robust functionality.
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+- Modern and intuitive user interface
+- Responsive design for both iOS and Android
+- Smooth animations and transitions using React Native Reanimated
+- Secure data storage with AsyncStorage
+- Efficient list rendering with Shopify FlashList
+- Haptic feedback for enhanced user experience
+- Bottom tab navigation
+- Blur effects and linear gradients for modern UI elements
+- WebView support for external content
+- State management using Zustand
+- TypeScript for type safety
 
-   ```bash
-   npm install
-   ```
+## 📱 Technologies Used
 
-2. Start the app
+- React Native
+- Expo
+- TypeScript
+- React Navigation
+- Expo Router
+- AsyncStorage
+- React Native Reanimated
+- Expo Haptics
+- Expo Blur
+- Zustand (State Management)
+- And more...
 
-   ```bash
-    npx expo start
-   ```
+## 🛠️ Prerequisites
 
-In the output, you'll find options to open the app in a
+Before running this project, make sure you have the following installed:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js (LTS version)
+- Yarn or npm
+- Expo CLI
+- iOS Simulator (for Mac users) or Android Studio (for Android development)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🚀 Getting Started
 
-## Get a fresh project
-
-When you're ready, run:
-
+1. Clone the repository:
 ```bash
-npm run reset-project
+git clone [your-repository-url]
+cd ecom-mobile
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Install dependencies:
+```bash
+yarn install
+# or
+npm install
+```
 
-## Learn more
+3. Start the development server:
+```bash
+yarn start
+# or
+npm start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+4. Run on specific platforms:
+```bash
+# For iOS
+yarn ios
+# or
+npm run ios
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+# For Android
+yarn android
+# or
+npm run android
 
-## Join the community
+# For web
+yarn web
+# or
+npm run web
+```
 
-Join our community of developers creating universal apps.
+## 📂 Project Structure
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+ecom-mobile/
+├── app/                 # Main application code
+│   └── modals/         # Modal components
+├── src/                # Source files
+├── .expo/              # Expo configuration
+├── node_modules/       # Dependencies
+├── babel.config.js     # Babel configuration
+├── tsconfig.json       # TypeScript configuration
+├── eas.json           # EAS Build configuration
+└── package.json       # Project dependencies and scripts
+```
+
+## 🧪 Testing
+
+Run tests using Jest:
+```bash
+yarn test
+# or
+npm test
+```
+
+## 🔍 Linting
+
+Run linting checks:
+```bash
+yarn lint
+# or
+npm run lint
+```
+
+## 📱 Building for Production
+
+This project uses EAS Build for creating production builds. Configure your build settings in `eas.json`.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👥 Authors
+
+- Your Name - Initial work
+
+## 🙏 Acknowledgments
+
+- Expo team for the amazing framework
+- React Native community
+- All contributors who helped with the project
