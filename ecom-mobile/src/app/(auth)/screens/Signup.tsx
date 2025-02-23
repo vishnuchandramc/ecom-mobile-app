@@ -104,11 +104,13 @@ const Signup = () => {
         >
           Already have an account?
         </ThemedText>
-        <Link href='/(auth)/screens/Login' asChild>
-          <Button variant='tertiary' style={styles.link}>
-            Login here
-          </Button>
-        </Link>
+        <Button
+          onPress={() => router.push('/(auth)/screens/Login')}
+          variant='tertiary'
+          style={styles.link}
+        >
+          Login here
+        </Button>
       </ThemedView>
     </Wrapper>
   )
