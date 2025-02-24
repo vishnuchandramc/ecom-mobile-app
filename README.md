@@ -35,6 +35,57 @@ For a video demonstration, please [click here](https://github.com/user-attachmen
 - **Cart**: Add items to your cart and manage your purchases effortlessly.
 - **Animations**: Enjoy smooth and engaging animations throughout the app.
 
+## 🏗️ Architecture Overview
+This project follows Clean architecture with state management, ensuring separation of concerns and maintainable codebase.
+
+```
+Action (User Interaction)
+   ↓
+Store (Zustand Store)
+   ↓
+View (React Components)
+   ↓
+Action (Repeat)
+```
+
+#### 1. Domain Layer (Models)
+- Location: `src/models/`
+- Purpose: Contains business models and interfaces
+- Example: `ProductModel`, `AuthModels`
+- Independent of other layers
+
+#### 2. Business Logic Layer (Hooks)
+- Location: `src/hooks/`
+- Purpose: Custom hooks encapsulating business logic
+- Examples:
+  - `useProductListing`: Handles product fetching and filtering
+  - `useLogin`: Manages authentication logic
+- Implements use cases and business rules
+
+#### 3. Data Layer (Services)
+- Location: `src/services/`
+- Purpose: Handles external data sources and API communication
+- Examples:
+  - `fetchWrapper`: HTTP client wrapper
+  - `AuthService`: Authentication service
+
+#### 4. Presentation Layer (Components)
+- Location: `src/components/`
+- Organization: Follows Atomic Design principles
+  - `atoms/`: Basic building blocks
+  - `molecules/`: Combinations of atoms
+  - `organisms/`: Complex UI components
+- Pure UI components separated from business logic
+
+#### 5. State Management Layer (Store)
+- Location: `src/store/`
+- Technology: Zustand
+- Purpose: Centralized state management
+- Examples:
+  - `cartStore`: Shopping cart state
+  - `authStore`: Authentication state
+  - `filterStore`: Product filtering state
+
 ## Expo Build
 
 BLUME is built using Expo, which simplifies the development process and allows for easy deployment across multiple platforms.
